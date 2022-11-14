@@ -1,0 +1,14 @@
+{
+  "name": "boom-bust-server",
+  "version": "1",
+  "main": "index.js",
+  "author": "Lidiya Chernomorova",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.26",
+    "nodemon": "^2.0.4"
+  }
+}

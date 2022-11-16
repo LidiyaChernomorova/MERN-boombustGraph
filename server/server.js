@@ -1,5 +1,4 @@
 const express = require("express");
-const fs = require("fs");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("./csv-to-json");
@@ -16,11 +15,11 @@ app.use(bodyParser.json());
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 app.use("/api", noteRouter);
+
+app.get("/api/companies-names",  (req, res) => {
+    res.sendFile(__dirname + "/assets/meta-data.json");
+})
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
 

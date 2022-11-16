@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import api from "../api";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   function handleClick() {

@@ -1,0 +1,35 @@
+﻿{
+	"FullNames":
+	{
+		"AAPL": "Apple Inc",
+		"C": "Citigroup Inc",
+		"DIS": "The Walt Disney Co",
+		"F": "Ford Motor Co",
+		"GOOG":"Alphabet Inc",
+		"JNJ": "Johnson & Johnson",
+		"KO": "The Coca-Cola Co",
+		"MCD": "McDonald's Corp",
+		"MA": "Mastercard Inc",
+		"MO": "Altria Group Inc",
+		"MS": "Morgan Stanley",
+		"MSFT": "Microsoft Corp",
+		"NFLX": "Netflix Inc",
+		"NKE": "NIKE Inc",
+		"NVDA": "NVIDIA Corp",
+		"ORCL": "Oracle Corp",
+		"PFE": "Pfizer Inc"
+	},
+	"Intervals":
+	{
+		"AAPL": ["3/1/2022", "12/4/2022"],
+		"C": ["3/1/2022", "12/4/2022"],
+		"DIS": ["3/1/2022", "1/4/2022"],
+		"F": ["3/1/2022", "12/4/2022"],
+		"GOOG": ["3/1/2022", "12/4/2022"],
+		"JNJ": ["3/1/2022", "12/4/2022"],
+		"KO": ["3/1/2022", "1/4/2022"],
+		"MCD": ["3/1/2022", "1/4/2022"],
+		"ORCL": ["3/1/2022", "12/4/2022"],
+		"PFE": ["3/1/2022", "12/4/2022"]
+	}
+}

@@ -1,19 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../api";
+import CompanyList from "./components/company-list/company-list.component";
 
 function App() {
-  function handleClick() {
-    api.getCompaniesNames().then((data) => {
-      console.log(data.data.data);
+  const [companies, setCompanies] = useState([]);
 
-      console.log(typeof data.data.data);
+  function handleClick() {
+    api.getCompaniesNames().then((res) => {
+      setCompanies(Object.values(res.data.FULL_NAMES));
     });
   }
 
+  useEffect(() => {
+    handleClick();
+  }, []);
+
   return (
-    <div>
-      <button onClick={handleClick}>click</button>
-    </div>
+    <>
+      <button onClick={handleClick}>click!</button>
+      {companies?.length && <CompanyList companies={companies} />}
+    </>
   );
 }
 

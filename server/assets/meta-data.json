@@ -1,5 +1,5 @@
 ﻿{
-	"FullNames":
+	"FULL_NAMES":
 	{
 		"AAPL": "Apple Inc",
 		"C": "Citigroup Inc",
@@ -19,7 +19,7 @@
 		"ORCL": "Oracle Corp",
 		"PFE": "Pfizer Inc"
 	},
-	"Intervals":
+	"INTERVALES":
 	{
 		"AAPL": ["3/1/2022", "12/4/2022"],
 		"C": ["3/1/2022", "12/4/2022"],

@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "@mui/material/Card";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,7 +10,8 @@ import Paper from "@mui/material/Paper";
 
 function CompanyTable({ rows }) {
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: 100 }}>
+    <Card sx={{ p: 2, m: 1 }}>
+    <TableContainer component={Paper} sx={{ maxHeight: 300 }}>
       <Table
         sx={{ minWidth: 650, maxHeight: 50 }}
         size="small"
@@ -41,6 +43,7 @@ function CompanyTable({ rows }) {
         </TableBody>
       </Table>
     </TableContainer>
+</Card>
   );
 }
 

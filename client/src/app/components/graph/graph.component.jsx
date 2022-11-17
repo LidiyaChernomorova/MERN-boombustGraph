@@ -1,8 +1,8 @@
 import React from "react";
-import { Card } from '@mui/material';
+import { Card } from "@mui/material";
 
 function Graph() {
-  return <Card>graph</Card>
+  return <Card sx={{ p: 2, m: 1 }}>graph</Card>;
 }
 
 export default Graph;

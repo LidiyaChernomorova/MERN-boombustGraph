@@ -25,10 +25,10 @@ function App() {
 
   return (
     <>
-      <h1>BOOM BUST Signals of Asymmetrical Risk/Reward</h1>
-      <h2>SIGNALS</h2>
+      <h1 style={{ paddingLeft: '10px', background: 'brown', marginTop: 0 }}>BOOM BUST Signals of Asymmetrical Risk/Reward</h1>
+      <h2 style={{ marginLeft: '40px' }}>SIGNALS</h2>
       {companies?.length && <CompanyTable rows={companies} />}
-      <Graph/>
+      <Graph />
     </>
   );
 }

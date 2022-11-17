@@ -17,7 +17,9 @@ function App() {
 
   return (
     <>
-      <button onClick={handleClick}>click!</button>
+      <h1>BOOM BUST Signals of Asymmetrical Risk/Reward</h1>
+      <h2>SIGNALS</h2>
+      {/* <button onClick={handleClick}>click!</button> */}
       {companies?.length && <CompanyList companies={companies} />}
     </>
   );

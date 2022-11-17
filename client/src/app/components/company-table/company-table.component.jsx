@@ -1,29 +1,29 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import {  grey } from "@mui/material/colors";
+
+
+const thStyle ={ borderColor: grey[700], bgcolor: "background.paper" }
+const trStyle ={ borderColor: grey[700] }
 
 function CompanyTable({ rows }) {
   return (
-    <Card sx={{ p: 2, m: 1 }}>
     <TableContainer component={Paper} sx={{ maxHeight: 300 }}>
-      <Table
-        sx={{ minWidth: 650, maxHeight: 50 }}
-        size="small"
-        stickyHeader
-        aria-label="sticky table"
-      >
+      <Table sx={{ minWidth: 650, maxHeight: 50 }} size="small" stickyHeader>
         <TableHead>
           <TableRow>
-            <TableCell>ASSET</TableCell>
-            <TableCell align="right">NAME</TableCell>
-            <TableCell align="right">DATE</TableCell>
-            <TableCell align="right">NOTE</TableCell>
+            <TableCell sx={thStyle}>ASSET</TableCell>
+            <TableCell align="right" sx={thStyle}>NAME</TableCell>
+            <TableCell align="right" sx={thStyle}>DATE</TableCell>
+            <TableCell align="right" sx={thStyle}>NOTE</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -32,18 +32,15 @@ function CompanyTable({ rows }) {
               key={row.asset}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {row.asset}
-              </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.date}</TableCell>
-              <TableCell align="right">{row.note}</TableCell>
+              <TableCell sx={trStyle} component="th" scope="row">{row.asset}</TableCell>
+              <TableCell sx={trStyle} align="right">{row.name}</TableCell>
+              <TableCell sx={trStyle} align="right">{row.date}</TableCell>
+              <TableCell sx={trStyle} align="right">{row.note}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-</Card>
   );
 }
 

@@ -4,16 +4,27 @@ import App from "./app";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { deepOrange, grey } from "@mui/material/colors";
 
-const darkTheme = createTheme({
+const theme = createTheme({
   palette: {
     mode: "dark",
+    primary: grey,
+    border: "#fff",
+    background: {
+      paper: grey[800],
+      default: grey[900],
+      secondary: deepOrange[900],
+    },
+    text: {
+      primary: "#fff",
+    },
   },
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <StyledEngineProvider injectFirst>
         <App />

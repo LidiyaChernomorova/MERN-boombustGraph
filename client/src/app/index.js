@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../api";
 import CompanyTable from "./components/company-table/company-table.component";
+import Graph from "./components/graph/graph.component";
 
 function App() {
   const [companies, setCompanies] = useState([]);
@@ -26,8 +27,8 @@ function App() {
     <>
       <h1>BOOM BUST Signals of Asymmetrical Risk/Reward</h1>
       <h2>SIGNALS</h2>
-      {/* <button onClick={getData}>click!</button> */}
       {companies?.length && <CompanyTable rows={companies} />}
+      <Graph/>
     </>
   );
 }

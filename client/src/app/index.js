@@ -5,22 +5,29 @@ import CompanyList from "./components/company-list/company-list.component";
 function App() {
   const [companies, setCompanies] = useState([]);
 
-  function handleClick() {
+  function createData(res) {
+    const data = Object.entries(res.data.FULL_NAMES);
+    return data.map((item) => {
+      return { asset: item[0], name: item[1], date: "1/1/1111", note: "ololo" };
+    });
+  }
+
+  function getData() {
     api.getCompaniesNames().then((res) => {
-      setCompanies(Object.values(res.data.FULL_NAMES));
+      setCompanies(createData(res));
     });
   }
 
   useEffect(() => {
-    handleClick();
+    getData();
   }, []);
 
   return (
     <>
       <h1>BOOM BUST Signals of Asymmetrical Risk/Reward</h1>
       <h2>SIGNALS</h2>
-      {/* <button onClick={handleClick}>click!</button> */}
-      {companies?.length && <CompanyList companies={companies} />}
+      {/* <button onClick={getData}>click!</button> */}
+      {companies?.length && <CompanyList rows={companies} />}
     </>
   );
 }

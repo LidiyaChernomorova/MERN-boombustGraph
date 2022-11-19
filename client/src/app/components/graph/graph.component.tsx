@@ -59,9 +59,9 @@ function Graph() {
     yaxis: "y",
   };
 
-  var data: Partial<OhclData>[] = [trace1];
+  const data: Partial<OhclData>[] = [trace1];
 
-  var layout: Partial<Layout> = {
+  const layout: Partial<Layout> = {
     height: 270,
     plot_bgcolor: "transparent",
     paper_bgcolor: "transparent",

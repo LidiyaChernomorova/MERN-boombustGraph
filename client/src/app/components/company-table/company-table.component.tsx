@@ -14,6 +14,8 @@ import CompanyData from "../../interfaces/company-data.interface";
 const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
 const trStyle = { borderColor: grey[700] };
 
+function pickCompany(): void {}
+
 function CompanyTable({ rows }: { rows: CompanyData[] }) {
   return (
     <TableContainer component={Paper} sx={{ maxHeight: 270 }}>
@@ -35,6 +37,7 @@ function CompanyTable({ rows }: { rows: CompanyData[] }) {
         <TableBody>
           {rows.map((row) => (
             <TableRow
+              onClick={pickCompany}
               key={row.asset}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >

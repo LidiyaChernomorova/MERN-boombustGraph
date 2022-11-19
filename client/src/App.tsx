@@ -10,15 +10,15 @@ import { deepOrange } from "@mui/material/colors";
 function App() {
   const [companies, setCompanies] = useState<CompanyData[]>([]);
 
-  function createData(res: { data: CompaniesResponce }) {
+  function createData(res: { data: CompaniesResponce }): CompanyData[] {
     const data = Object.entries(res.data.FULL_NAMES);
     return data.map((item) => {
       return { asset: item[0], name: item[1], date: "1/1/1111", note: "ololo" };
     });
   }
 
-  function getData() {
-    api.getCompaniesNames().then((res) => {
+  function getData(): void {
+    api.getCompaniesNames().then((res: { data: CompaniesResponce }) => {
       setCompanies(createData(res));
     });
   }

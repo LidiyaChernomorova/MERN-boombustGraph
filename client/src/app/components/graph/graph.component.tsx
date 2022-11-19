@@ -53,11 +53,9 @@ function Graph() {
       132.050003,
     ],
 
-    // line: { color: "green" },
-    type: 'ohcl',
+    type: "ohlc" as 'ohcl',
     xaxis: "x",
     yaxis: "y",
-    //fillcolor: "red",
   };
 
   var data: Partial<OhclData>[] = [trace1];
@@ -85,7 +83,7 @@ function Graph() {
 
   const config: Partial<Config> = {
     autosizable: true,
-    responsive: true,
+    //responsive: true,
   };
 
   return (

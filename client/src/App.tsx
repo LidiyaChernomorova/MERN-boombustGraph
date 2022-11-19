@@ -3,14 +3,14 @@ import api from "./api";
 import CompanyTable from "./app/components/company-table/company-table.component";
 import Graph from "./app/components/graph/graph.component";
 import { Typography } from "@mui/material";
-import CompaniesResponce from "./app/interfaces/companies-responce.interface";
+import MetaDataResp from "./app/interfaces/meta-data-resp.interface";
 import CompanyData from "./app/interfaces/company-data.interface";
 import { deepOrange } from "@mui/material/colors";
 
 function App() {
   const [companies, setCompanies] = useState<CompanyData[]>([]);
 
-  function createData(res: { data: CompaniesResponce }): CompanyData[] {
+  function createData(res: { data: MetaDataResp }): CompanyData[] {
     const data = Object.entries(res.data.FULL_NAMES);
     return data.map((item) => {
       return { asset: item[0], name: item[1], date: "1/1/1111", note: "ololo" };
@@ -18,7 +18,13 @@ function App() {
   }
 
   function getData(): void {
-    api.getCompaniesNames().then((res: { data: CompaniesResponce }) => {
+    api.getMetaData().then((res: { data: MetaDataResp }) => {
+      setCompanies(createData(res));
+    });
+  }
+
+  function getCompanyData(companyName: string): void {
+    api.getCompanyData(companyName).then((res: { data: MetaDataResp }) => {
       setCompanies(createData(res));
     });
   }
@@ -29,6 +35,7 @@ function App() {
 
   return (
     <>
+    <button onClick={()=>getCompanyData('GOOG')}>click</button>
       <Typography sx={{ bgcolor: deepOrange[900], p: 1 }} variant="h5">
         BOOM BUST Signals of Asymmetrical Risk/Reward
       </Typography>

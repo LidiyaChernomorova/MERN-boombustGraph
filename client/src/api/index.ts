@@ -12,14 +12,16 @@ export const updateNoteById = (id: number, payload: string) => api.put(`/note/${
 export const deleteNoteById = (id: number) => api.delete(`/note/${id}`);
 
 // COMPANIES
-export const getCompaniesNames = () => api.get(`/companies-names`);
+export const getMetaData = () => api.get(`/meta-data`);
+export const getCompanyData = (companyName: string)=> api.get(`/asset/${companyName}`);
 
 const apis = {
   insertNote,
   getAllNotes,
   updateNoteById,
   deleteNoteById,
-  getCompaniesNames,
+  getMetaData,
+  getCompanyData
 };
 
 export default apis;

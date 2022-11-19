@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,15 +8,19 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { grey, brown } from "@mui/material/colors";
 import CompanyData from "../../interfaces/company-data.interface";
 
-const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
-const trStyle = { borderColor: grey[700] };
-
-function pickCompany(): void {}
-
 function CompanyTable({ rows }: { rows: CompanyData[] }) {
+  const [selectedRow, setSelectedRow] = useState("");
+
+  const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
+  const trStyle = { borderColor: grey[700] };
+
+  function pickCompany(asset: string): void {
+    setSelectedRow(asset);
+  }
+
   return (
     <TableContainer component={Paper} sx={{ maxHeight: 270 }}>
       <Table sx={{ minWidth: 650, maxHeight: 50 }} size="small" stickyHeader>
@@ -37,7 +41,9 @@ function CompanyTable({ rows }: { rows: CompanyData[] }) {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              onClick={pickCompany}
+              hover
+              style={row.asset === selectedRow ? { background: brown[500] } : {}}
+              onClick={() => pickCompany(row.asset)}
               key={row.asset}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >

@@ -5,6 +5,7 @@ require("./csv-to-json");
 
 const db = require("./db");
 const noteRouter = require("./routes/note-router");
+const assetsRouter = require("./routes/assets-router");
 
 const app = express();
 const apiPort = 3000;
@@ -16,10 +17,7 @@ app.use(bodyParser.json());
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use("/api", noteRouter);
-
-app.get("/api/companies-names",  (req, res) => {
-    res.sendFile(__dirname + "/assets/meta-data.json");
-})
+app.use("/api", assetsRouter);
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
 

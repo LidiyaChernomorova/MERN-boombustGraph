@@ -1,6 +1,6 @@
 import StringObject from "./string-object.interface";
 
-export default interface CompaniesResponce {
+export default interface MetaDataResp {
   FULL_NAMES: StringObject;
   INTERVALES: StringObject;
 }

@@ -16,7 +16,7 @@ const trStyle = { borderColor: grey[700] };
 
 function CompanyTable({ rows }: { rows: CompanyData[] }) {
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: 300 }}>
+    <TableContainer component={Paper} sx={{ maxHeight: 270 }}>
       <Table sx={{ minWidth: 650, maxHeight: 50 }} size="small" stickyHeader>
         <TableHead>
           <TableRow>

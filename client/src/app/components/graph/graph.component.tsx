@@ -54,7 +54,7 @@ function Graph() {
       132.050003,
     ],
 
-    type: "ohlc" as 'ohcl',
+    type: "ohlc" as "ohcl",
     xaxis: "x",
     yaxis: "y",
   };
@@ -80,11 +80,18 @@ function Graph() {
       color: "white",
       griddash: "dot",
     },
+    height: 270,
+    margin: {
+      t: 0,
+      b: 30,
+      l: 0,
+      pad: 0,
+    },
   };
 
   const config: Partial<Config> = {
     autosizable: true,
-    //responsive: true,
+    responsive: true,
   };
 
   return (

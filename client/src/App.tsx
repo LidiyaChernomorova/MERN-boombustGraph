@@ -23,19 +23,12 @@ function App() {
     });
   }
 
-  function getCompanyData(companyName: string): void {
-    api.getCompanyData(companyName).then((res: { data: MetaDataResp }) => {
-      setCompanies(createData(res));
-    });
-  }
-
   useEffect(() => {
     getData();
   }, []);
 
   return (
     <>
-    <button onClick={()=>getCompanyData('GOOG')}>click</button>
       <Typography sx={{ bgcolor: deepOrange[900], p: 1 }} variant="h5">
         BOOM BUST Signals of Asymmetrical Risk/Reward
       </Typography>

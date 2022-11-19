@@ -13,21 +13,38 @@ glob(csvPath + "*.csv", {}, async (err, files) => {
   }
 
   const allScvFiles = await Promise.all(
-    files.map((file) => {
-      const fileName = path.basename(file, '.csv')
+    files.map((file, index) => {
+      const fileName = path.basename(file, ".csv");
       const jsonFileName = jsonPath + fileName + ".json";
 
       if (fs.existsSync(jsonFileName)) {
         return;
       }
 
-      return csv()
+      return csv({ output: "csv", noheader: true })
         .fromFile(file)
         .then((file) => {
-          return { jsonObj: JSON.stringify(file), jsonFileName };
+          const copy = [...file[0]].reduce((acc, header, headerIndex) => {
+            if (header === "HiGH") {
+              header = "HIGH";
+            }
+
+            
+            return {
+              ...acc,
+              [header]: file.reduce((acc, arr, index) => {
+                if (index === 0) return acc;
+                return [...acc, file[index][headerIndex]];
+              }, []),
+            };
+          }, {});
+
+          return { jsonObj: JSON.stringify(copy), jsonFileName };
         });
     })
   );
 
-  allScvFiles.forEach((file) => file && fs.writeFileSync(file.jsonFileName, file.jsonObj));
+  allScvFiles.forEach(
+    (file) => file && fs.writeFileSync(file.jsonFileName, file.jsonObj)
+  );
 });

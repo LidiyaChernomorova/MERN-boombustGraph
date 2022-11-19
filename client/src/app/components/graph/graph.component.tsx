@@ -92,6 +92,7 @@ function Graph() {
   const config: Partial<Config> = {
     autosizable: true,
     responsive: true,
+    displayModeBar: false
   };
 
   return (

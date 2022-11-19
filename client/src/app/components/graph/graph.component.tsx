@@ -1,9 +1,10 @@
 import React from "react";
 import { Card } from "@mui/material";
 import Plot from "react-plotly.js";
+import { OhclData, Layout, Config } from "plotly.js";
 
 function Graph() {
-  var trace1 = {
+  var trace1: Partial<OhclData> = {
     x: [
       "2017-01-17",
       "2017-01-18",
@@ -27,7 +28,7 @@ function Graph() {
     ],
 
     decreasing: { line: { color: "#d70200" } },
-    increasing: { line: { color: '#6ba583' } },
+    increasing: { line: { color: "#6ba583" } },
 
     open: [
       118.339996, 120, 119.400002, 120.449997, 120, 119.550003, 120.419998,
@@ -52,45 +53,44 @@ function Graph() {
       132.050003,
     ],
 
-    line: { color: "green" },
-    type: "ohlc",
+    // line: { color: "green" },
+    type: 'ohcl',
     xaxis: "x",
     yaxis: "y",
-    fillcolor: "red",
+    //fillcolor: "red",
   };
 
-  var data = [trace1];
+  var data: Partial<OhclData>[] = [trace1];
 
-  var layout = {
+  var layout: Partial<Layout> = {
     plot_bgcolor: "transparent",
     paper_bgcolor: "transparent",
     xaxis: {
-       linecolor: 'green',
-         gridcolor: 'yellow',
-      color: 'white',
-      griddash: 'dot',
+      linecolor: "green",
+      gridcolor: "yellow",
+      color: "white",
+      griddash: "dot",
       rangeslider: {
         visible: false,
       },
     },
     yaxis: {
-      side: 'right' ,
-       linecolor: 'green',
-         gridcolor: 'yellow',
-      color: 'white',
-      griddash: 'dot',
+      side: "right",
+      linecolor: "green",
+      gridcolor: "yellow",
+      color: "white",
+      griddash: "dot",
     },
-
   };
 
-const config ={
-  autosizable: true,
-  responsive: true
-}
+  const config: Partial<Config> = {
+    autosizable: true,
+    responsive: true,
+  };
 
   return (
     <Card sx={{ p: 2, mt: 2 }}>
-      <Plot data={data} layout={layout} config={config}/>
+      <Plot data={data} layout={layout} config={config} />
     </Card>
   );
 }

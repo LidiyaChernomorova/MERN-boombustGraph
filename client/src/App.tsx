@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import api from "../api";
-import CompanyTable from "./components/company-table/company-table.component";
-import Graph from "./components/graph/graph.component";
+import api from "./api";
+import CompanyTable from "./app/components/company-table/company-table.component";
+import Graph from "./app/components/graph/graph.component";
 import { Typography } from "@mui/material";
+import CompaniesResponce from "./app/interfaces/companies-responce.interface";
+import CompanyData from "./app/interfaces/company-data.interface";
+import { deepOrange } from "@mui/material/colors";
 
 function App() {
-  const [companies, setCompanies] = useState([]);
+  const [companies, setCompanies] = useState<CompanyData[]>([]);
 
-  function createData(res) {
+  function createData(res: { data: CompaniesResponce }) {
     const data = Object.entries(res.data.FULL_NAMES);
     return data.map((item) => {
       return { asset: item[0], name: item[1], date: "1/1/1111", note: "ololo" };
@@ -26,7 +29,7 @@ function App() {
 
   return (
     <>
-      <Typography sx={{ bgcolor: "background.secondary", p: 1 }} variant="h5">
+      <Typography sx={{ bgcolor: deepOrange[900], p: 1 }} variant="h5">
         BOOM BUST Signals of Asymmetrical Risk/Reward
       </Typography>
       <div style={{ padding: "20px" }}>

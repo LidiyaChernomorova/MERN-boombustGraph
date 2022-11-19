@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./app";
+import App from "./App";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,11 +10,9 @@ const theme = createTheme({
   palette: {
     mode: "dark",
     primary: grey,
-    border: "#fff",
     background: {
       paper: grey[800],
       default: grey[900],
-      secondary: deepOrange[900],
     },
     text: {
       primary: "#fff",

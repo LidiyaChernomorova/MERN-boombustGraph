@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "@mui/material";
 import Plot from "react-plotly.js";
 import { OhclData, Layout, Config } from "plotly.js";
+import { grey } from "@mui/material/colors";
 
 function Graph() {
   var trace1: Partial<OhclData> = {
@@ -64,8 +65,8 @@ function Graph() {
     plot_bgcolor: "transparent",
     paper_bgcolor: "transparent",
     xaxis: {
-      linecolor: "green",
-      gridcolor: "yellow",
+      linecolor: "white",
+      gridcolor: grey[600],
       color: "white",
       griddash: "dot",
       rangeslider: {
@@ -74,8 +75,8 @@ function Graph() {
     },
     yaxis: {
       side: "right",
-      linecolor: "green",
-      gridcolor: "yellow",
+      linecolor: "white",
+      gridcolor: grey[600],
       color: "white",
       griddash: "dot",
     },

@@ -62,6 +62,7 @@ function Graph() {
   var data: Partial<OhclData>[] = [trace1];
 
   var layout: Partial<Layout> = {
+    height: 270,
     plot_bgcolor: "transparent",
     paper_bgcolor: "transparent",
     xaxis: {
@@ -80,24 +81,29 @@ function Graph() {
       color: "white",
       griddash: "dot",
     },
-    height: 270,
     margin: {
       t: 0,
-      b: 30,
+      b: 35,
       l: 0,
+      r: 30,
       pad: 0,
     },
   };
 
   const config: Partial<Config> = {
-    autosizable: true,
     responsive: true,
-    displayModeBar: false
+    displayModeBar: false,
   };
 
   return (
     <Card sx={{ p: 2, mt: 2 }}>
-      <Plot data={data} layout={layout} config={config} />
+      <Plot
+        data={data}
+        layout={layout}
+        config={config}
+        useResizeHandler={true}
+        style={{ width: "100%", height: "100%" }}
+      />
     </Card>
   );
 }

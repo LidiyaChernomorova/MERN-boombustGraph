@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Card } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import Plot from "react-plotly.js";
 import { OhclData } from "plotly.js";
 import { layout, config, makeData } from "./graph-settings";
 import api from "../../../api";
+import DateRangePicker from "../date-range-picker/date-range-picker.component";
 
 function Graph() {
   const [data, setData] = useState<Partial<OhclData>[] | null>(null);
@@ -16,6 +17,12 @@ function Graph() {
 
   return (
     <Card sx={{ p: 2, mt: 2 }}>
+      <div style={{display: 'flex'}}>
+        <Typography sx={{ p: 1 }} variant="h6">
+          GOOG
+        </Typography>
+        <DateRangePicker />
+      </div>
       <button onClick={() => getCompanyData("GOOG")}>click</button>
       {data ? (
         <Plot

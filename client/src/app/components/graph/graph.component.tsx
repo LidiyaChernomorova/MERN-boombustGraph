@@ -17,7 +17,7 @@ function Graph() {
 
   return (
     <Card sx={{ p: 2, mt: 2 }}>
-      <div style={{display: 'flex'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <Typography sx={{ p: 1 }} variant="h6">
           GOOG
         </Typography>

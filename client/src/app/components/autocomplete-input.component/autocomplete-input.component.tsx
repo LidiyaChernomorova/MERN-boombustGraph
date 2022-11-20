@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-const options = ["Option 1", "Option 2"];
+const options = ["11/11/1111", "22/22/2222"];
 
 export default function AutocompleteInput({ label }: { label: string }) {
   const [value, setValue] = useState<string | null>(options[0]);
@@ -10,6 +10,7 @@ export default function AutocompleteInput({ label }: { label: string }) {
 
   return (
     <Autocomplete
+      freeSolo={true}
       size="small"
       value={value}
       onChange={(event: any, newValue: string | null) => {
@@ -20,7 +21,7 @@ export default function AutocompleteInput({ label }: { label: string }) {
         setInputValue(newInputValue);
       }}
       options={options}
-      sx={{ width: 200 }}
+      sx={{ width: 140 }}
       renderInput={(params) => <TextField {...params} label={label} />}
     />
   );

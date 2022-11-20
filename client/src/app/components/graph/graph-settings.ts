@@ -24,9 +24,9 @@ export const layout: Partial<Layout> = {
   },
   margin: {
     t: 0,
-    b: 35,
+    b: 60,
     l: 0,
-    r: 30,
+    r: 35,
     pad: 0,
   },
 };

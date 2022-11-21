@@ -29,10 +29,10 @@ function* tableData() {
   }
 }
 
-export function* onSingOutStart() {
+export function* onGetMetaDataStart() {
   yield takeLatest(TABLE_DATA_ACTION_TYPES.GET.START, tableData);
 }
 
 export function* dataSaga() {
-  yield all([call(onSingOutStart)]);
+  yield all([call(onGetMetaDataStart)]);
 }

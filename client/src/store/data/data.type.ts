@@ -1,7 +1,7 @@
-export const META_DATA_ACTION_TYPES = {
+export const TABLE_DATA_ACTION_TYPES = {
   GET: {
-    START: "data/getMetaDataStart",
-    SUCCESS: "data/getMetaDataSuccess",
-    FAILED: "data/getMetaDataFailed",
+    START: "data/getTableDataStart",
+    SUCCESS: "data/getTableDataSuccess",
+    FAILED: "data/getTableDataFailed",
   }
 };

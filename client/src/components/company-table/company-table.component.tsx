@@ -9,9 +9,9 @@ import {
   Paper,
 } from "@mui/material";
 import { grey, brown } from "@mui/material/colors";
-import CompanyData from "../../interfaces/company-data.interface";
+import TableData from "../../interfaces/table-data.interface";
 
-function CompanyTable({ rows }: { rows: CompanyData[] }) {
+function CompanyTable({ rows }: { rows: TableData[] }) {
   const [selectedRow, setSelectedRow] = useState("");
 
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };

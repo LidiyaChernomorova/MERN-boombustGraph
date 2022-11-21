@@ -1,25 +1,36 @@
 import { takeLatest, all, call, put } from "redux-saga/effects";
 import api from "../../api";
+import TableData from "../../interfaces/table-data.interface";
 import MetaDataResp from "../../interfaces/meta-data-resp.interface";
-import { metaDataFailed, metaDataSuccess } from "./data.action";
-import { META_DATA_ACTION_TYPES } from "./data.type";
+import { tableDataFailed, tableDataSuccess } from "./data.action";
+import { TABLE_DATA_ACTION_TYPES } from "./data.type";
 
-async function metaDataUser(): Promise<MetaDataResp> {
+async function getMetaData(): Promise<TableData[]> {
   const { data } = await api.getMetaData();
-  return data;
+  return createTableData(data);
 }
 
-function* metaData() {
+
+function createTableData(metaData: MetaDataResp): TableData[] {
+  const fullNames = Object.keys(metaData.FULL_NAMES);
+  const intervales = metaData.INTERVALES;
+  return fullNames.map((asset) => {
+    return { asset, name: metaData.FULL_NAMES[asset], date: intervales[asset] || 'no data', note: "ololo" };
+  });
+}
+
+
+function* tableData() {
   try {
-    const data: MetaDataResp = yield call(metaDataUser);
-    yield put(metaDataSuccess(data));
+    const data: TableData = yield call(getMetaData);
+    yield put(tableDataSuccess(data));
   } catch (error: any) {
-    yield put(metaDataFailed(error));
+    yield put(tableDataFailed(error));
   }
 }
 
 export function* onSingOutStart() {
-  yield takeLatest(META_DATA_ACTION_TYPES.GET.START, metaData);
+  yield takeLatest(TABLE_DATA_ACTION_TYPES.GET.START, tableData);
 }
 
 export function* dataSaga() {

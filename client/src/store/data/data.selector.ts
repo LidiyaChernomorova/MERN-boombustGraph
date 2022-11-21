@@ -1,6 +1,6 @@
 import Store from "../../interfaces/store.interface";
 
-export const selectMetaData = (store: Store) => store.user.metaData;
+export const selectTableData = (store: Store) => store.data.tableData;
 
-export const selectUserIsLoading = (store: Store) =>
-  store.user.isLoading && selectMetaData;
+export const selectTableDataIsLoading = (store: Store) =>
+  store.data.isLoading && selectTableData;

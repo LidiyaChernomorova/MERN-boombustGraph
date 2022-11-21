@@ -1,6 +1,6 @@
-import { META_DATA_ACTION_TYPES } from "./data.type";
+import { TABLE_DATA_ACTION_TYPES } from "./data.type";
 const USER_INITIAL_STATE = {
-  metaData: null,
+  tableData: null,
   isLoading: false,
 };
 
@@ -11,11 +11,11 @@ export const dataReducer = (
   const { type, payload } = action;
 
   switch (type) {
-    case META_DATA_ACTION_TYPES.GET.START:
+    case TABLE_DATA_ACTION_TYPES.GET.START:
       return { ...state, isLoading: true };
-    case META_DATA_ACTION_TYPES.GET.SUCCESS:
-      return { ...state, metaData: payload, isLoading: false };
-    case META_DATA_ACTION_TYPES.GET.FAILED:
+    case TABLE_DATA_ACTION_TYPES.GET.SUCCESS:
+      return { ...state, tableData: payload, isLoading: false };
+    case TABLE_DATA_ACTION_TYPES.GET.FAILED:
       return { ...state, error: payload, isLoading: false };
     default:
       return state;

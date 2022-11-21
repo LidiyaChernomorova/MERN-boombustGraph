@@ -1,8 +1,8 @@
-import MetaDataResp from "./meta-data-resp.interface";
+import TableData from "./table-data.interface";
 
 export default interface Store {
-  user: {
-    metaData: MetaDataResp;
+  data: {
+    tableData: TableData[];
     isLoading: boolean;
   };
 }

@@ -10,14 +10,19 @@ import {
 } from "@mui/material";
 import { grey, brown } from "@mui/material/colors";
 import TableData from "../../interfaces/table-data.interface";
+import { companyDataStart } from "../../store/data/data.action";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function CompanyTable({ rows }: { rows: TableData[] }) {
+  const dispatch = useDispatch();
   const [selectedRow, setSelectedRow] = useState("");
 
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
   const trStyle = { borderColor: grey[700] };
 
   function pickCompany(asset: string): void {
+    dispatch(companyDataStart(asset));
     setSelectedRow(asset);
   }
 
@@ -42,7 +47,9 @@ function CompanyTable({ rows }: { rows: TableData[] }) {
           {rows.map((row) => (
             <TableRow
               hover
-              style={row.asset === selectedRow ? { background: brown[500] } : {}}
+              style={
+                row.asset === selectedRow ? { background: brown[500] } : {}
+              }
               onClick={() => pickCompany(row.asset)}
               key={row.asset}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -54,7 +61,7 @@ function CompanyTable({ rows }: { rows: TableData[] }) {
                 {row.name}
               </TableCell>
               <TableCell sx={trStyle} align="right">
-                {row.date ? row.date[0] + ' - ' + row.date[1] : 'no data'}
+                {row.date ? row.date[0] + " - " + row.date[1] : "no data"}
               </TableCell>
               <TableCell sx={trStyle} align="right">
                 {row.note}

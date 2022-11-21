@@ -5,11 +5,20 @@ import { OhclData } from "plotly.js";
 import { layout, config, makeData } from "./graph-settings";
 import api from "../../api";
 import DateRangePicker from "../date-range-picker/date-range-picker.component";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { companyDataStart } from "../../store/data/data.action";
+
 
 function Graph() {
   const [data, setData] = useState<Partial<OhclData>[] | null>(null);
 
+  const dispatch = useDispatch();
+  //const tableData = useSelector(selectTableData);
+  //const isLoading = useSelector(selectTableDataIsLoading);
+
   function getCompanyData(companyName: string): void {
+    dispatch(companyDataStart(companyName))
     api.getCompanyData(companyName).then((res) => {
       setData(makeData(res.data));
     });

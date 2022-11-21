@@ -2,23 +2,59 @@ import { takeLatest, all, call, put } from "redux-saga/effects";
 import api from "../../api";
 import TableData from "../../interfaces/table-data.interface";
 import MetaDataResp from "../../interfaces/meta-data-resp.interface";
-import { tableDataFailed, tableDataSuccess } from "./data.action";
+import {
+  tableDataFailed,
+  tableDataSuccess,
+  companyDataSuccess,
+  companyDataFailed,
+} from "./data.action";
 import { TABLE_DATA_ACTION_TYPES } from "./data.type";
+import GraphData from "../../interfaces/graph-data.interface";
 
 async function getMetaData(): Promise<TableData[]> {
   const { data } = await api.getMetaData();
   return createTableData(data);
 }
 
+async function getCompanyData(companyName: string): Promise<GraphData> {
+  const { data } = await api.getCompanyData(companyName);
+  return makeData(data);
+}
+
+export function makeData(data: GraphData): any {
+  // replase this obj to conponent no need to keep it in store
+  const defaultSettings = {
+    decreasing: { line: { color: "#d70200" } },
+    increasing: { line: { color: "#6ba583" } },
+    type: "ohlc" as "ohcl",
+    xaxis: "x",
+    yaxis: "y",
+  };
+
+  return [
+    {
+      ...defaultSettings,
+      x: data.DATE,
+      open: data.OPEN,
+      close: data.CLOSE,
+      high: data.HIGH,
+      low: data.LOW,
+    },
+  ];
+}
 
 function createTableData(metaData: MetaDataResp): TableData[] {
   const fullNames = Object.keys(metaData.FULL_NAMES);
   const intervales = metaData.INTERVALES;
   return fullNames.map((asset) => {
-    return { asset, name: metaData.FULL_NAMES[asset], date: intervales[asset] || null, note: "ololo" };
+    return {
+      asset,
+      name: metaData.FULL_NAMES[asset],
+      date: intervales[asset] || null,
+      note: "ololo",
+    };
   });
 }
-
 
 function* tableData() {
   try {
@@ -29,10 +65,23 @@ function* tableData() {
   }
 }
 
+function* companyData(action: { type: string; payload: any }) {
+  try {
+    const data: GraphData = yield call(getCompanyData, action.payload);
+    yield put(companyDataSuccess(data));
+  } catch (error: any) {
+    yield put(companyDataFailed(error));
+  }
+}
+
+export function* onGetCompanyDataStart() {
+  yield takeLatest(TABLE_DATA_ACTION_TYPES.GET.COMPANY.START, companyData);
+}
+
 export function* onGetMetaDataStart() {
-  yield takeLatest(TABLE_DATA_ACTION_TYPES.GET.START, tableData);
+  yield takeLatest(TABLE_DATA_ACTION_TYPES.GET.META.START, tableData);
 }
 
 export function* dataSaga() {
-  yield all([call(onGetMetaDataStart)]);
+  yield all([call(onGetMetaDataStart), call(onGetCompanyDataStart)]);
 }

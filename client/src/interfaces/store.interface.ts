@@ -1,8 +1,5 @@
-import TableData from "./table-data.interface";
+import DataStore from "./data-store.interface";
 
 export default interface Store {
-  data: {
-    tableData: TableData[];
-    isLoading: boolean;
-  };
+  data: DataStore;
 }

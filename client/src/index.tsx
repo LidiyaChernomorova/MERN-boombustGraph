@@ -4,7 +4,9 @@ import App from "./App";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { deepOrange, grey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 const theme = createTheme({
   palette: {
@@ -22,12 +24,14 @@ const theme = createTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <StyledEngineProvider injectFirst>
-        <App />
-      </StyledEngineProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <StyledEngineProvider injectFirst>
+          <App />
+        </StyledEngineProvider>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

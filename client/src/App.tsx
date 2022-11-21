@@ -1,14 +1,33 @@
 import React, { useEffect, useState } from "react";
 import api from "./api";
-import CompanyTable from "./app/components/company-table/company-table.component";
-import Graph from "./app/components/graph/graph.component";
+import CompanyTable from "./components/company-table/company-table.component";
+import Graph from "./components/graph/graph.component";
 import { Typography } from "@mui/material";
-import MetaDataResp from "./app/interfaces/meta-data-resp.interface";
-import CompanyData from "./app/interfaces/company-data.interface";
+import MetaDataResp from "./interfaces/meta-data-resp.interface";
+import CompanyData from "./interfaces/company-data.interface";
 import { deepOrange } from "@mui/material/colors";
+
+// import {
+//   selectCartItemsCount,
+//   selectPopupOpened,
+// } from "../../store/cart/cart.selector";
+import { metaDataStart } from "./store/data/data.action";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function App() {
   const [companies, setCompanies] = useState<CompanyData[]>([]);
+
+  const dispatch = useDispatch();
+
+//  const metaData = useSelector(selectCurrentUser);
+
+  //const isLoading = useSelector(selectUserIsLoading);
+
+  async function metaDataHandler() {
+    dispatch(metaDataStart());
+  }
+
 
   function createData(res: { data: MetaDataResp }): CompanyData[] {
     const data = Object.entries(res.data.FULL_NAMES);
@@ -18,6 +37,7 @@ function App() {
   }
 
   function getData(): void {
+    metaDataHandler();
     api.getMetaData().then((res: { data: MetaDataResp }) => {
       setCompanies(createData(res));
     });

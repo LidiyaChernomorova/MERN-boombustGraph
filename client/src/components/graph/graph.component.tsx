@@ -3,7 +3,7 @@ import { Card, Typography } from "@mui/material";
 import Plot from "react-plotly.js";
 import { OhclData } from "plotly.js";
 import { layout, config, makeData } from "./graph-settings";
-import api from "../../../api";
+import api from "../../api";
 import DateRangePicker from "../date-range-picker/date-range-picker.component";
 
 function Graph() {

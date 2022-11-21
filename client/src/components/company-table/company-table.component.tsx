@@ -31,7 +31,7 @@ function CompanyTable({ rows }: { rows: TableData[] }) {
               NAME
             </TableCell>
             <TableCell align="right" sx={thStyle}>
-              DATE
+              DATE RANGE
             </TableCell>
             <TableCell align="right" sx={thStyle}>
               NOTE
@@ -54,7 +54,7 @@ function CompanyTable({ rows }: { rows: TableData[] }) {
                 {row.name}
               </TableCell>
               <TableCell sx={trStyle} align="right">
-                {row.date}
+                {row.date ? row.date[0] + ' - ' + row.date[1] : 'no data'}
               </TableCell>
               <TableCell sx={trStyle} align="right">
                 {row.note}

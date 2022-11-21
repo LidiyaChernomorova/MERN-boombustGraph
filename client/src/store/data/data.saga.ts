@@ -15,7 +15,7 @@ function createTableData(metaData: MetaDataResp): TableData[] {
   const fullNames = Object.keys(metaData.FULL_NAMES);
   const intervales = metaData.INTERVALES;
   return fullNames.map((asset) => {
-    return { asset, name: metaData.FULL_NAMES[asset], date: intervales[asset] || 'no data', note: "ololo" };
+    return { asset, name: metaData.FULL_NAMES[asset], date: intervales[asset] || null, note: "ololo" };
   });
 }
 

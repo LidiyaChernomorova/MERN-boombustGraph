@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Card,
 } from "@mui/material";
 import { grey, brown } from "@mui/material/colors";
 import { companyPickedName } from "../../store/data/data.action";
@@ -15,7 +16,7 @@ import { useSelector } from "react-redux";
 import {
   selectTableData,
   selectTableDataIsLoading,
-  selectPikedCompanyName
+  selectPikedCompanyName,
 } from "../../store/data/data.selector";
 import { tableDataStart } from "../../store/data/data.action";
 
@@ -37,11 +38,11 @@ function CompanyTable() {
   }, []);
 
   if (isLoading) {
-    return <>loading...</>;
+    return <Card sx={{ p: 2, height: 270 }}>loading...</Card>;
   }
 
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: 270 }}>
+    <TableContainer component={Paper} sx={{ height: 270 }}>
       <Table sx={{ minWidth: 650, maxHeight: 50 }} size="small" stickyHeader>
         <TableHead>
           <TableRow>
@@ -62,7 +63,9 @@ function CompanyTable() {
             <TableRow
               hover
               style={
-                row.asset === CompanyPickedName ? { background: brown[500] } : {}
+                row.asset === CompanyPickedName
+                  ? { background: brown[500] }
+                  : {}
               }
               onClick={() => pickCompany(row.asset)}
               key={row.asset}

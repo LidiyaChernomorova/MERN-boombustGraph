@@ -5,12 +5,13 @@ import MetaDataResp from "../../interfaces/meta-data-resp.interface";
 import {
   tableDataFailed,
   tableDataSuccess,
+  companyDataStart,
   companyDataSuccess,
   companyDataFailed,
 } from "./data.action";
 import { TABLE_DATA_ACTION_TYPES } from "./data.type";
 import CompanyData from "../../interfaces/company-data.interface";
-import Action from '../../interfaces/action.interface'
+import Action from "../../interfaces/action.interface";
 
 async function getMetaData(): Promise<TableData[]> {
   const { data } = await api.getMetaData();
@@ -19,29 +20,7 @@ async function getMetaData(): Promise<TableData[]> {
 
 async function getCompanyData(companyName: string): Promise<CompanyData> {
   const { data } = await api.getCompanyData(companyName);
-  return makeData(data);
-}
-
-export function makeData(data: CompanyData): any {
-  // replase this obj to conponent no need to keep it in store
-  const defaultSettings = {
-    decreasing: { line: { color: "#d70200" } },
-    increasing: { line: { color: "#6ba583" } },
-    type: "ohlc" as "ohcl",
-    xaxis: "x",
-    yaxis: "y",
-  };
-
-  return [
-    {
-      ...defaultSettings,
-      x: data.DATE,
-      open: data.OPEN,
-      close: data.CLOSE,
-      high: data.HIGH,
-      low: data.LOW,
-    },
-  ];
+  return data;
 }
 
 function createTableData(metaData: MetaDataResp): TableData[] {
@@ -75,6 +54,10 @@ function* companyData(action: Action) {
   }
 }
 
+function* companyPickedName(action: Action) {
+  yield put(companyDataStart(action.payload));
+}
+
 export function* onGetCompanyDataStart() {
   yield takeLatest(TABLE_DATA_ACTION_TYPES.COMPANY.START, companyData);
 }
@@ -83,9 +66,17 @@ export function* onGetMetaDataStart() {
   yield takeLatest(TABLE_DATA_ACTION_TYPES.META.START, tableData);
 }
 
+export function* onGetCompanyPickedName() {
+  yield takeEvery(
+    TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME,
+    companyPickedName
+  );
+}
+
 export function* dataSaga() {
   yield all([
     call(onGetMetaDataStart),
     call(onGetCompanyDataStart),
+    call(onGetCompanyPickedName),
   ]);
 }

@@ -4,7 +4,8 @@ import DataStore from "../../interfaces/data-store.interface";
 const USER_INITIAL_STATE: DataStore = {
   tableData: [],
   isLoading: false,
-  selectedCompany: {}
+  pikedCompany: null,
+  pikedCompanyName: "",
 };
 
 export const dataReducer = (
@@ -23,7 +24,7 @@ export const dataReducer = (
     case TABLE_DATA_ACTION_TYPES.GET.COMPANY.START:
       return { ...state, isLoading: true };
     case TABLE_DATA_ACTION_TYPES.GET.COMPANY.SUCCESS:
-      return { ...state, selectedCompany: payload, isLoading: false };
+      return { ...state, pikedCompany: payload, isLoading: false };
     case TABLE_DATA_ACTION_TYPES.GET.COMPANY.FAILED:
       return { ...state, error: payload, isLoading: false };
     default:

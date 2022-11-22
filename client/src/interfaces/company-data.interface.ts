@@ -1,6 +1,8 @@
-export default interface TableData {
-  asset: string;
-  name: string;
-  date: string | null;
-  note: string;
+export default interface CompanyData {
+  CLOSE: string[];
+  DATE: string[];
+  HIGH: string[];
+  LOW: string[];
+  OPEN: string[];
+  VOLUME: string[];
 }

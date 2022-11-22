@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import {
   selectTableData,
   selectTableDataIsLoading,
+  selectPikedCompanyName
 } from "../../store/data/data.selector";
 import { tableDataStart } from "../../store/data/data.action";
 
@@ -22,15 +23,13 @@ function CompanyTable() {
   const dispatch = useDispatch();
   const rows = useSelector(selectTableData);
   const isLoading = useSelector(selectTableDataIsLoading);
-
-  const [selectedRow, setSelectedRow] = useState("");
+  const pikedCompanyName = useSelector(selectPikedCompanyName);
 
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
   const trStyle = { borderColor: grey[700] };
 
   function pickCompany(asset: string): void {
     dispatch(companyDataStart(asset));
-    setSelectedRow(asset);
   }
 
   useEffect(() => {
@@ -63,7 +62,7 @@ function CompanyTable() {
             <TableRow
               hover
               style={
-                row.asset === selectedRow ? { background: brown[500] } : {}
+                row.asset === pikedCompanyName ? { background: brown[500] } : {}
               }
               onClick={() => pickCompany(row.asset)}
               key={row.asset}

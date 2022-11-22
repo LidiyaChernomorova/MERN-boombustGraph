@@ -1,6 +1,6 @@
 import { Layout, Config } from "plotly.js";
 import { grey } from "@mui/material/colors";
-import GraphData from "../../interfaces/graph-data.interface";
+import CompanyData from "../../interfaces/company-data.interface";
 
 export const layout: Partial<Layout> = {
   height: 270,
@@ -36,7 +36,7 @@ export const config: Partial<Config> = {
   displayModeBar: false,
 };
 
-export function makeData(data: GraphData): any {
+export function makeData(data: CompanyData): any {
   const defaultSettings = {
     decreasing: { line: { color: "#d70200" } },
     increasing: { line: { color: "#6ba583" } },

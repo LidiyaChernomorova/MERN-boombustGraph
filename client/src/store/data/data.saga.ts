@@ -9,19 +9,19 @@ import {
   companyDataFailed,
 } from "./data.action";
 import { TABLE_DATA_ACTION_TYPES } from "./data.type";
-import GraphData from "../../interfaces/graph-data.interface";
+import CompanyData from "../../interfaces/company-data.interface";
 
 async function getMetaData(): Promise<TableData[]> {
   const { data } = await api.getMetaData();
   return createTableData(data);
 }
 
-async function getCompanyData(companyName: string): Promise<GraphData> {
+async function getCompanyData(companyName: string): Promise<CompanyData> {
   const { data } = await api.getCompanyData(companyName);
   return makeData(data);
 }
 
-export function makeData(data: GraphData): any {
+export function makeData(data: CompanyData): any {
   // replase this obj to conponent no need to keep it in store
   const defaultSettings = {
     decreasing: { line: { color: "#d70200" } },
@@ -67,7 +67,7 @@ function* tableData() {
 
 function* companyData(action: { type: string; payload: any }) {
   try {
-    const data: GraphData = yield call(getCompanyData, action.payload);
+    const data: CompanyData = yield call(getCompanyData, action.payload);
     yield put(companyDataSuccess(data));
   } catch (error: any) {
     yield put(companyDataFailed(error));

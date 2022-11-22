@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -9,13 +9,20 @@ import {
   Paper,
 } from "@mui/material";
 import { grey, brown } from "@mui/material/colors";
-import TableData from "../../interfaces/table-data.interface";
 import { companyDataStart } from "../../store/data/data.action";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import {
+  selectTableData,
+  selectTableDataIsLoading,
+} from "../../store/data/data.selector";
+import { tableDataStart } from "../../store/data/data.action";
 
-function CompanyTable({ rows }: { rows: TableData[] }) {
+function CompanyTable() {
   const dispatch = useDispatch();
+  const rows = useSelector(selectTableData);
+  const isLoading = useSelector(selectTableDataIsLoading);
+
   const [selectedRow, setSelectedRow] = useState("");
 
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
@@ -24,6 +31,14 @@ function CompanyTable({ rows }: { rows: TableData[] }) {
   function pickCompany(asset: string): void {
     dispatch(companyDataStart(asset));
     setSelectedRow(asset);
+  }
+
+  useEffect(() => {
+    dispatch(tableDataStart());
+  }, []);
+
+  if (isLoading) {
+    return <>loading...</>;
   }
 
   return (

@@ -33,3 +33,11 @@ export function companyDataFailed(error: Error) {
 export function companyPickedName(companyName: string) {
   return createAction<string>(TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME, companyName);
 }
+
+export function companyPickedFrom(from: string) {
+  return createAction<string>(TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_FROM, from);
+}
+
+export function companyPickedTo(to: string) {
+  return createAction<string>(TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_TO, to);
+}

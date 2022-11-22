@@ -8,6 +8,8 @@ export const TABLE_DATA_ACTION_TYPES = {
       START: "data: get companyDataStart",
       SUCCESS: "data: get companyDataSuccess",
       FAILED: "data: get companyDataFailed",
-      PICKED_NAME: "data: get companyPickedName",
+      PICKED_NAME: "data: get companyPicked Name",
+      PICKED_FROM: "data: get companyPicked From",
+      PICKED_TO: "data: get companyPicked To",
     },
 };

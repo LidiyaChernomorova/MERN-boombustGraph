@@ -6,4 +6,6 @@ export default interface DataStore {
     isLoading: boolean;
     CompanyPicked: CompanyData | null;
     CompanyPickedName: string;
+    CompanyPickedFrom: string;
+    CompanyPickedTo: string;
 }

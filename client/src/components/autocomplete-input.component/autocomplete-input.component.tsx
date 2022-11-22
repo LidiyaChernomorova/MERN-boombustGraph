@@ -4,7 +4,13 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { useSelector } from "react-redux";
 import { selectPikedCompany } from "../../store/data/data.selector";
 
-export default function AutocompleteInput({ label }: { label: string }) {
+export default function AutocompleteInput({
+  label,
+  passValueToParent,
+}: {
+  label: string;
+  passValueToParent: Function;
+}) {
   const [options, setOptions] = useState<string[]>([]);
   const [value, setValue] = useState<string | null>("");
   const [inputValue, setInputValue] = useState("");
@@ -20,6 +26,7 @@ export default function AutocompleteInput({ label }: { label: string }) {
       size="small"
       value={value}
       onChange={(event: any, newValue: string | null) => {
+        newValue && passValueToParent(newValue, label);
         setValue(newValue);
       }}
       inputValue={inputValue}

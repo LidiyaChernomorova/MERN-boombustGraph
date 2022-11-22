@@ -7,6 +7,8 @@ const USER_INITIAL_STATE: DataStore = {
   isLoading: false,
   CompanyPicked: null,
   CompanyPickedName: "",
+  CompanyPickedFrom: '',
+  CompanyPickedTo: '',
 };
 
 export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
@@ -26,7 +28,11 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
     case TABLE_DATA_ACTION_TYPES.COMPANY.FAILED:
       return { ...state, error: payload, isLoading: false };
     case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME:
-      return { ...state, CompanyPickedName: payload, isLoading: false };
+      return { ...state, CompanyPickedName: payload };
+    case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_FROM:
+      return { ...state, CompanyPickedFrom: payload };
+    case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_TO:
+      return { ...state, CompanyPickedTo: payload };
     default:
       return state;
   }

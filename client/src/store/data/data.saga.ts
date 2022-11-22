@@ -8,6 +8,8 @@ import {
   companyDataStart,
   companyDataSuccess,
   companyDataFailed,
+  companyPickedFrom,
+  companyPickedTo,
 } from "./data.action";
 import { TABLE_DATA_ACTION_TYPES } from "./data.type";
 import CompanyData from "../../interfaces/company-data.interface";
@@ -49,6 +51,13 @@ function* companyData(action: Action) {
   try {
     const data: CompanyData = yield call(getCompanyData, action.payload);
     yield put(companyDataSuccess(data));
+    const from = { value: data.DATE[0], index: 0 };
+    const to = {
+      value: data.DATE[data.DATE.length - 1],
+      index: data.DATE.length - 1,
+    };
+    yield put(companyPickedFrom(from));
+    yield put(companyPickedTo(to));
   } catch (error: any) {
     yield put(companyDataFailed(error));
   }

@@ -4,7 +4,6 @@ import CompanyData from "../../interfaces/company-data.interface";
 
 export function makeLayout(range: number[] | null): Partial<Layout> {
   const defaultSettings: Partial<Layout> = {
-    height: 270,
     plot_bgcolor: "transparent",
     paper_bgcolor: "transparent",
     xaxis: {

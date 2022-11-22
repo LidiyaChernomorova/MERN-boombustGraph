@@ -23,7 +23,7 @@ function CompanyTable() {
   const dispatch = useDispatch();
   const rows = useSelector(selectTableData);
   const isLoading = useSelector(selectTableDataIsLoading);
-  const pikedCompanyName = useSelector(selectPikedCompanyName);
+  const CompanyPickedName = useSelector(selectPikedCompanyName);
 
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
   const trStyle = { borderColor: grey[700] };
@@ -62,7 +62,7 @@ function CompanyTable() {
             <TableRow
               hover
               style={
-                row.asset === pikedCompanyName ? { background: brown[500] } : {}
+                row.asset === CompanyPickedName ? { background: brown[500] } : {}
               }
               onClick={() => pickCompany(row.asset)}
               key={row.asset}

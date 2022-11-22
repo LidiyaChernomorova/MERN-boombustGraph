@@ -1,14 +1,15 @@
 export const TABLE_DATA_ACTION_TYPES = {
-  GET: {
+
     META: {
-      START: "data/getTableDataStart",
-      SUCCESS: "data/getTableDataSuccess",
-      FAILED: "data/getTableDataFailed",
+      START: "data: get tableDataStart",
+      SUCCESS: "data: get tableDataSuccess",
+      FAILED: "data: get tableDataFailed",
     },
     COMPANY: {
-      START: "data/getCompanyDataStart",
-      SUCCESS: "data/getCompanyDataSuccess",
-      FAILED: "data/getCompanyDataFailed",
+      START: "data: get companyDataStart",
+      SUCCESS: "data: get companyDataSuccess",
+      FAILED: "data: get companyDataFailed",
+      PICKED_NAME: "data: get companyPickedName",
     },
-  },
+
 };

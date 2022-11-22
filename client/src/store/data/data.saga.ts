@@ -75,11 +75,11 @@ function* companyData(action: { type: string; payload: any }) {
 }
 
 export function* onGetCompanyDataStart() {
-  yield takeLatest(TABLE_DATA_ACTION_TYPES.GET.COMPANY.START, companyData);
+  yield takeLatest(TABLE_DATA_ACTION_TYPES.COMPANY.START, companyData);
 }
 
 export function* onGetMetaDataStart() {
-  yield takeLatest(TABLE_DATA_ACTION_TYPES.GET.META.START, tableData);
+  yield takeLatest(TABLE_DATA_ACTION_TYPES.META.START, tableData);
 }
 
 export function* dataSaga() {

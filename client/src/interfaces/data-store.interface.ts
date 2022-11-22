@@ -3,9 +3,10 @@ import CompanyData from "./company-data.interface";
 
 export default interface DataStore {
   tableData: TableData[];
-  isLoading: boolean;
-  CompanyPicked: CompanyData | null;
-  CompanyPickedName: string;
-  CompanyPickedFrom: { value: string; index: number };
-  CompanyPickedTo: { value: string; index: number };
+  tableIsLoading: boolean;
+  companyIsLoading: boolean;
+  companyPicked: CompanyData | null;
+  companyPickedName: string;
+  companyPickedFrom: { value: string; index: number };
+  companyPickedTo: { value: string; index: number };
 }

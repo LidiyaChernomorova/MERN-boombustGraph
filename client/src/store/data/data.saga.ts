@@ -75,7 +75,7 @@ export function* onGetMetaDataStart() {
   yield takeLatest(TABLE_DATA_ACTION_TYPES.META.START, tableData);
 }
 
-export function* onGetCompanyPickedName() {
+export function* onGetcompanyPickedName() {
   yield takeEvery(
     TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME,
     companyPickedName
@@ -86,6 +86,6 @@ export function* dataSaga() {
   yield all([
     call(onGetMetaDataStart),
     call(onGetCompanyDataStart),
-    call(onGetCompanyPickedName),
+    call(onGetcompanyPickedName),
   ]);
 }

@@ -4,11 +4,12 @@ import Action from "../../interfaces/action.interface";
 
 const USER_INITIAL_STATE: DataStore = {
   tableData: [],
-  isLoading: false,
-  CompanyPicked: null,
-  CompanyPickedName: "",
-  CompanyPickedFrom: { value: "", index: 0 },
-  CompanyPickedTo: { value: "", index: 0 },
+  tableIsLoading: false,
+  companyIsLoading: false,
+  companyPicked: null,
+  companyPickedName: "",
+  companyPickedFrom: { value: "", index: 0 },
+  companyPickedTo: { value: "", index: 0 },
 };
 
 export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
@@ -16,23 +17,23 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
 
   switch (type) {
     case TABLE_DATA_ACTION_TYPES.META.START:
-      return { ...state, isLoading: true };
+      return { ...state, tableIsLoading: true };
     case TABLE_DATA_ACTION_TYPES.META.SUCCESS:
-      return { ...state, tableData: payload, isLoading: false };
+      return { ...state, tableData: payload, tableIsLoading: false };
     case TABLE_DATA_ACTION_TYPES.META.FAILED:
-      return { ...state, error: payload, isLoading: false };
+      return { ...state, error: payload, tableIsLoading: false };
     case TABLE_DATA_ACTION_TYPES.COMPANY.START:
-      return { ...state, isLoading: true };
+      return { ...state, companyIsLoading: true };
     case TABLE_DATA_ACTION_TYPES.COMPANY.SUCCESS:
-      return { ...state, CompanyPicked: payload, isLoading: false };
+      return { ...state, companyPicked: payload, companyIsLoading: false };
     case TABLE_DATA_ACTION_TYPES.COMPANY.FAILED:
-      return { ...state, error: payload, isLoading: false };
+      return { ...state, error: payload, companyIsLoading: false };
     case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME:
-      return { ...state, CompanyPickedName: payload };
+      return { ...state, companyPickedName: payload };
     case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_FROM:
-      return { ...state, CompanyPickedFrom: payload };
+      return { ...state, companyPickedFrom: payload };
     case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_TO:
-      return { ...state, CompanyPickedTo: payload };
+      return { ...state, companyPickedTo: payload };
     default:
       return state;
   }

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import {
   selectPikedCompany,
   selectPikedCompanyName,
-  selectTableDataIsLoading,
+  selectCompanyDataIsLoading,
   selectPikedCompanyFrom,
   selectPikedCompanyTo,
 } from "../../store/data/data.selector";
@@ -20,7 +20,7 @@ function Graph() {
   const companyPickedName = useSelector(selectPikedCompanyName);
   const companyPickedFrom = useSelector(selectPikedCompanyFrom);
   const companyPickedTo = useSelector(selectPikedCompanyTo);
-  const isLoading = useSelector(selectTableDataIsLoading);
+  const isLoading = useSelector(selectCompanyDataIsLoading);
 
   useEffect(() => {
     if (companyPickedFrom && companyPickedTo) {

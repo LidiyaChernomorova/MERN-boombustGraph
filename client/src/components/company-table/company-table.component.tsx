@@ -24,7 +24,7 @@ function CompanyTable() {
   const dispatch = useDispatch();
   const rows = useSelector(selectTableData);
   const isLoading = useSelector(selectTableDataIsLoading);
-  const CompanyPickedName = useSelector(selectPikedCompanyName);
+  const pickedName = useSelector(selectPikedCompanyName);
 
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
   const trStyle = { borderColor: grey[700] };
@@ -63,7 +63,7 @@ function CompanyTable() {
             <TableRow
               hover
               style={
-                row.asset === CompanyPickedName
+                row.asset === pickedName
                   ? { background: brown[500] }
                   : {}
               }

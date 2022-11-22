@@ -43,7 +43,7 @@ export default function AutocompleteInput({
         setInputValue(newInputValue);
       }}
       options={options}
-      sx={{ width: 170 }}
+      sx={{ width: 180 }}
       renderInput={(params) => <TextField {...params} label={label} />}
     />
   );

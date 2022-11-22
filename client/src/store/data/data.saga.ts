@@ -1,4 +1,4 @@
-import { takeLatest, all, call, put } from "redux-saga/effects";
+import { takeLatest, all, call, put, takeEvery } from "redux-saga/effects";
 import api from "../../api";
 import TableData from "../../interfaces/table-data.interface";
 import MetaDataResp from "../../interfaces/meta-data-resp.interface";
@@ -10,6 +10,7 @@ import {
 } from "./data.action";
 import { TABLE_DATA_ACTION_TYPES } from "./data.type";
 import CompanyData from "../../interfaces/company-data.interface";
+import Action from '../../interfaces/action.interface'
 
 async function getMetaData(): Promise<TableData[]> {
   const { data } = await api.getMetaData();
@@ -65,7 +66,7 @@ function* tableData() {
   }
 }
 
-function* companyData(action: { type: string; payload: any }) {
+function* companyData(action: Action) {
   try {
     const data: CompanyData = yield call(getCompanyData, action.payload);
     yield put(companyDataSuccess(data));
@@ -83,5 +84,8 @@ export function* onGetMetaDataStart() {
 }
 
 export function* dataSaga() {
-  yield all([call(onGetMetaDataStart), call(onGetCompanyDataStart)]);
+  yield all([
+    call(onGetMetaDataStart),
+    call(onGetCompanyDataStart),
+  ]);
 }

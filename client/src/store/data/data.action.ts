@@ -29,3 +29,7 @@ export function companyDataSuccess(companyData: any) {
 export function companyDataFailed(error: Error) {
   return createAction<Error>(TABLE_DATA_ACTION_TYPES.COMPANY.FAILED, error);
 }
+
+export function companyPickedName(companyName: string) {
+  return createAction<string>(TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME, companyName);
+}

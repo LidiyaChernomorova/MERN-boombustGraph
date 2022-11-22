@@ -1,5 +1,6 @@
 import { TABLE_DATA_ACTION_TYPES } from "./data.type";
 import DataStore from "../../interfaces/data-store.interface";
+import Action from "../../interfaces/action.interface";
 
 const USER_INITIAL_STATE: DataStore = {
   tableData: [],
@@ -8,10 +9,7 @@ const USER_INITIAL_STATE: DataStore = {
   CompanyPickedName: "",
 };
 
-export const dataReducer = (
-  state = USER_INITIAL_STATE,
-  action: { type: string; payload: any }
-) => {
+export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -28,7 +26,7 @@ export const dataReducer = (
     case TABLE_DATA_ACTION_TYPES.COMPANY.FAILED:
       return { ...state, error: payload, isLoading: false };
     case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME:
-      return { ...state, CompanyPicked: payload, isLoading: false };
+      return { ...state, CompanyPickedName: payload, isLoading: false };
     default:
       return state;
   }

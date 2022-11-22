@@ -1,5 +1,4 @@
 export const TABLE_DATA_ACTION_TYPES = {
-
     META: {
       START: "data: get tableDataStart",
       SUCCESS: "data: get tableDataSuccess",
@@ -11,5 +10,4 @@ export const TABLE_DATA_ACTION_TYPES = {
       FAILED: "data: get companyDataFailed",
       PICKED_NAME: "data: get companyPickedName",
     },
-
 };

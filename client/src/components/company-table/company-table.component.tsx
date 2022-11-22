@@ -9,7 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import { grey, brown } from "@mui/material/colors";
-import { companyDataStart } from "../../store/data/data.action";
+import { companyPickedName } from "../../store/data/data.action";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -29,7 +29,7 @@ function CompanyTable() {
   const trStyle = { borderColor: grey[700] };
 
   function pickCompany(asset: string): void {
-    dispatch(companyDataStart(asset));
+    dispatch(companyPickedName(asset));
   }
 
   useEffect(() => {

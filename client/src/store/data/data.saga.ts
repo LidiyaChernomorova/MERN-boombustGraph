@@ -11,7 +11,7 @@ import {
   companyPickedFrom,
   companyPickedTo,
 } from "./data.action";
-import { TABLE_DATA_ACTION_TYPES } from "./data.type";
+import { ACTION_TYPES } from "./data.type";
 import CompanyData from "../../interfaces/company-data.interface";
 import Action from "../../interfaces/action.interface";
 
@@ -68,16 +68,16 @@ function* companyPickedName(action: Action) {
 }
 
 export function* onGetCompanyDataStart() {
-  yield takeLatest(TABLE_DATA_ACTION_TYPES.COMPANY.START, companyData);
+  yield takeLatest(ACTION_TYPES.COMPANY.START, companyData);
 }
 
 export function* onGetMetaDataStart() {
-  yield takeLatest(TABLE_DATA_ACTION_TYPES.META.START, tableData);
+  yield takeLatest(ACTION_TYPES.META.START, tableData);
 }
 
 export function* onGetcompanyPickedName() {
   yield takeEvery(
-    TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME,
+    ACTION_TYPES.COMPANY.PICKED_NAME,
     companyPickedName
   );
 }

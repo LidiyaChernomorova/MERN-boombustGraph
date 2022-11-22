@@ -1,4 +1,4 @@
-export const TABLE_DATA_ACTION_TYPES = {
+export const ACTION_TYPES = {
     META: {
       START: "data: get tableDataStart",
       SUCCESS: "data: get tableDataSuccess",

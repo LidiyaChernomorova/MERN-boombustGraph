@@ -1,4 +1,4 @@
-import { TABLE_DATA_ACTION_TYPES } from "./data.type";
+import { ACTION_TYPES } from "./data.type";
 import DataStore from "../../interfaces/data-store.interface";
 import Action from "../../interfaces/action.interface";
 
@@ -16,23 +16,23 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case TABLE_DATA_ACTION_TYPES.META.START:
+    case ACTION_TYPES.META.START:
       return { ...state, tableIsLoading: true };
-    case TABLE_DATA_ACTION_TYPES.META.SUCCESS:
+    case ACTION_TYPES.META.SUCCESS:
       return { ...state, tableData: payload, tableIsLoading: false };
-    case TABLE_DATA_ACTION_TYPES.META.FAILED:
+    case ACTION_TYPES.META.FAILED:
       return { ...state, error: payload, tableIsLoading: false };
-    case TABLE_DATA_ACTION_TYPES.COMPANY.START:
+    case ACTION_TYPES.COMPANY.START:
       return { ...state, companyIsLoading: true };
-    case TABLE_DATA_ACTION_TYPES.COMPANY.SUCCESS:
+    case ACTION_TYPES.COMPANY.SUCCESS:
       return { ...state, companyPicked: payload, companyIsLoading: false };
-    case TABLE_DATA_ACTION_TYPES.COMPANY.FAILED:
+    case ACTION_TYPES.COMPANY.FAILED:
       return { ...state, error: payload, companyIsLoading: false };
-    case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME:
+    case ACTION_TYPES.COMPANY.PICKED_NAME:
       return { ...state, companyPickedName: payload };
-    case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_FROM:
+    case ACTION_TYPES.COMPANY.PICKED_FROM:
       return { ...state, companyPickedFrom: payload };
-    case TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_TO:
+    case ACTION_TYPES.COMPANY.PICKED_TO:
       return { ...state, companyPickedTo: payload };
     default:
       return state;

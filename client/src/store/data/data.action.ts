@@ -1,57 +1,57 @@
-import { TABLE_DATA_ACTION_TYPES } from "./data.type";
+import { ACTION_TYPES } from "./data.type";
 import createAction from "../../helpers/create-action";
 import TableData from "../../interfaces/table-data.interface";
 
 export function tableDataStart() {
-  return createAction(TABLE_DATA_ACTION_TYPES.META.START);
+  return createAction(ACTION_TYPES.META.START);
 }
 
 export function tableDataSuccess(tableData: TableData) {
   return createAction<TableData>(
-    TABLE_DATA_ACTION_TYPES.META.SUCCESS,
+    ACTION_TYPES.META.SUCCESS,
     tableData
   );
 }
 
 export function tableDataFailed(error: Error) {
-  return createAction<Error>(TABLE_DATA_ACTION_TYPES.META.FAILED, error);
+  return createAction<Error>(ACTION_TYPES.META.FAILED, error);
 }
 
 export function companyDataStart(companyName: string) {
   return createAction<string>(
-    TABLE_DATA_ACTION_TYPES.COMPANY.START,
+    ACTION_TYPES.COMPANY.START,
     companyName
   );
 }
 
 export function companyDataSuccess(companyData: any) {
   return createAction<any>(
-    TABLE_DATA_ACTION_TYPES.COMPANY.SUCCESS,
+    ACTION_TYPES.COMPANY.SUCCESS,
     companyData
   );
 }
 
 export function companyDataFailed(error: Error) {
-  return createAction<Error>(TABLE_DATA_ACTION_TYPES.COMPANY.FAILED, error);
+  return createAction<Error>(ACTION_TYPES.COMPANY.FAILED, error);
 }
 
 export function companyPickedName(companyName: string) {
   return createAction<string>(
-    TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME,
+    ACTION_TYPES.COMPANY.PICKED_NAME,
     companyName
   );
 }
 
 export function companyPickedFrom(from: { value: string; index: number }) {
   return createAction<{ value: string; index: number }>(
-    TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_FROM,
+    ACTION_TYPES.COMPANY.PICKED_FROM,
     from
   );
 }
 
 export function companyPickedTo(to: { value: string; index: number }) {
   return createAction<{ value: string; index: number }>(
-    TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_TO,
+    ACTION_TYPES.COMPANY.PICKED_TO,
     to
   );
 }

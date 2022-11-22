@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AutocompleteInput from "../autocomplete-input.component/autocomplete-input.component";
 
 export default function DateRangePicker() {

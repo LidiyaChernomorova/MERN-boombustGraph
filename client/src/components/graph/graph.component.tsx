@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Card, Typography } from "@mui/material";
 import Plot from "react-plotly.js";
-import { OhclData } from "plotly.js";
-import { layout, config, makeData } from "./graph-settings";
+import { OhclData, Layout } from "plotly.js";
+import { makeLayout, config, makeData } from "./graph-settings";
 import DateRangePicker from "../date-range-picker/date-range-picker.component";
 import { useSelector } from "react-redux";
 import {
@@ -13,10 +13,12 @@ import {
 
 function Graph() {
   const [data, setData] = useState<Partial<OhclData>[] | null>(null);
+  const [layout, setLayout] = useState<Partial<Layout> | null>(null);
   const companyPicked = useSelector(selectPikedCompany);
   const companyPickedName = useSelector(selectPikedCompanyName);
   const isLoading = useSelector(selectTableDataIsLoading);
   useEffect(() => {
+    setLayout(makeLayout(["", ""]));
     companyPicked && setData(makeData(companyPicked));
   }, [companyPicked]);
 
@@ -24,9 +26,9 @@ function Graph() {
     <Card sx={{ p: 2, mt: 2 }} style={{ height: "500px" }}>
       {isLoading ? (
         <>loading...</>
-      ) : data ? (
+      ) : data && layout ? (
         <>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: '20px' }}>
             <Typography sx={{ p: 1 }} variant="h6">
               {companyPickedName}
             </Typography>

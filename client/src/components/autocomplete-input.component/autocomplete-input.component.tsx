@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-
-const options = ["11/11/1111", "22/22/2222"];
+import { useSelector } from "react-redux";
+import { selectPikedCompany } from "../../store/data/data.selector";
 
 export default function AutocompleteInput({ label }: { label: string }) {
-  const [value, setValue] = useState<string | null>(options[0]);
+  const [options, setOptions] = useState<string[]>([]);
+  const [value, setValue] = useState<string | null>("");
   const [inputValue, setInputValue] = useState("");
+  const companyPicked = useSelector(selectPikedCompany);
+
+  useEffect(() => {
+    companyPicked && setOptions(companyPicked.DATE);
+  }, [companyPicked]);
 
   return (
     <Autocomplete
@@ -21,7 +27,7 @@ export default function AutocompleteInput({ label }: { label: string }) {
         setInputValue(newInputValue);
       }}
       options={options}
-      sx={{ width: 140 }}
+      sx={{ width: 170 }}
       renderInput={(params) => <TextField {...params} label={label} />}
     />
   );

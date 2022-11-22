@@ -7,8 +7,8 @@ const USER_INITIAL_STATE: DataStore = {
   isLoading: false,
   CompanyPicked: null,
   CompanyPickedName: "",
-  CompanyPickedFrom: '',
-  CompanyPickedTo: '',
+  CompanyPickedFrom: null,
+  CompanyPickedTo: null,
 };
 
 export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {

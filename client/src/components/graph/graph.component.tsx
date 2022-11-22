@@ -9,6 +9,8 @@ import {
   selectPikedCompany,
   selectPikedCompanyName,
   selectTableDataIsLoading,
+  selectPikedCompanyFrom,
+  selectPikedCompanyTo,
 } from "../../store/data/data.selector";
 
 function Graph() {
@@ -16,11 +18,18 @@ function Graph() {
   const [layout, setLayout] = useState<Partial<Layout> | null>(null);
   const companyPicked = useSelector(selectPikedCompany);
   const companyPickedName = useSelector(selectPikedCompanyName);
+  const companyPickedFrom = useSelector(selectPikedCompanyFrom);
+  const companyPickedTo = useSelector(selectPikedCompanyTo);
   const isLoading = useSelector(selectTableDataIsLoading);
+
   useEffect(() => {
-    setLayout(makeLayout(["", ""]));
+    if (companyPickedFrom && companyPickedTo) {
+      setLayout(makeLayout([companyPickedFrom.index, companyPickedTo.index]));
+    } else {
+      setLayout(makeLayout(null));
+    }
     companyPicked && setData(makeData(companyPicked));
-  }, [companyPicked]);
+  }, [companyPicked, companyPickedFrom, companyPickedTo]);
 
   return (
     <Card sx={{ p: 2, mt: 2 }} style={{ height: "500px" }}>
@@ -28,7 +37,13 @@ function Graph() {
         <>loading...</>
       ) : data && layout ? (
         <>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: '20px' }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "20px",
+            }}
+          >
             <Typography sx={{ p: 1 }} variant="h6">
               {companyPickedName}
             </Typography>

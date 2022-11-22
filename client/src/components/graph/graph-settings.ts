@@ -2,13 +2,12 @@ import { Layout, Config } from "plotly.js";
 import { grey } from "@mui/material/colors";
 import CompanyData from "../../interfaces/company-data.interface";
 
-export function makeLayout(range: string[]): Partial<Layout> {
-  return {
+export function makeLayout(range: number[] | null): Partial<Layout> {
+  const defaultSettings: Partial<Layout> = {
     height: 270,
     plot_bgcolor: "transparent",
     paper_bgcolor: "transparent",
     xaxis: {
-      range,
       linecolor: "white",
       gridcolor: grey[600],
       color: "white",
@@ -32,6 +31,10 @@ export function makeLayout(range: string[]): Partial<Layout> {
       pad: 0,
     },
   };
+
+  return range
+    ? { ...defaultSettings, xaxis: { ...defaultSettings.xaxis, range } }
+    : defaultSettings;
 }
 
 export const config: Partial<Config> = {

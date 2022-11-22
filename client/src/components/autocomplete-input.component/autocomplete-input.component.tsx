@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import { Autocomplete, TextField, Chip } from "@mui/material";
 import { useSelector } from "react-redux";
 import { selectPikedCompany } from "../../store/data/data.selector";
-
 export default function AutocompleteInput({
   label,
   passValueToParent,
@@ -26,7 +24,7 @@ export default function AutocompleteInput({
       size="small"
       value={value}
       onChange={(event: any, newValue: string | null) => {
-        newValue && passValueToParent(newValue, label);
+        newValue && passValueToParent(event, newValue, label);
         setValue(newValue);
       }}
       inputValue={inputValue}

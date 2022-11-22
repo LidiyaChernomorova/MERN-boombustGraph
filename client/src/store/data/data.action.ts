@@ -2,28 +2,33 @@ import { TABLE_DATA_ACTION_TYPES } from "./data.type";
 import createAction from "../../helpers/create-action";
 import TableData from "../../interfaces/table-data.interface";
 
-
-
 export function tableDataStart() {
   return createAction(TABLE_DATA_ACTION_TYPES.META.START);
 }
 
 export function tableDataSuccess(tableData: TableData) {
-  return createAction<TableData>(TABLE_DATA_ACTION_TYPES.META.SUCCESS, tableData);
+  return createAction<TableData>(
+    TABLE_DATA_ACTION_TYPES.META.SUCCESS,
+    tableData
+  );
 }
 
 export function tableDataFailed(error: Error) {
   return createAction<Error>(TABLE_DATA_ACTION_TYPES.META.FAILED, error);
 }
 
-
-
 export function companyDataStart(companyName: string) {
-  return createAction<string>(TABLE_DATA_ACTION_TYPES.COMPANY.START, companyName);
+  return createAction<string>(
+    TABLE_DATA_ACTION_TYPES.COMPANY.START,
+    companyName
+  );
 }
 
 export function companyDataSuccess(companyData: any) {
-  return createAction<any>(TABLE_DATA_ACTION_TYPES.COMPANY.SUCCESS, companyData);
+  return createAction<any>(
+    TABLE_DATA_ACTION_TYPES.COMPANY.SUCCESS,
+    companyData
+  );
 }
 
 export function companyDataFailed(error: Error) {
@@ -31,13 +36,22 @@ export function companyDataFailed(error: Error) {
 }
 
 export function companyPickedName(companyName: string) {
-  return createAction<string>(TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME, companyName);
+  return createAction<string>(
+    TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_NAME,
+    companyName
+  );
 }
 
-export function companyPickedFrom(from: string) {
-  return createAction<string>(TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_FROM, from);
+export function companyPickedFrom(from: { value: string; index: number }) {
+  return createAction<{ value: string; index: number }>(
+    TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_FROM,
+    from
+  );
 }
 
-export function companyPickedTo(to: string) {
-  return createAction<string>(TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_TO, to);
+export function companyPickedTo(to: { value: string; index: number }) {
+  return createAction<{ value: string; index: number }>(
+    TABLE_DATA_ACTION_TYPES.COMPANY.PICKED_TO,
+    to
+  );
 }

@@ -9,9 +9,10 @@ import {
 export default function DateRangePicker() {
   const dispatch = useDispatch();
 
-  function handler(newValue: string, label: string) {
-    label === "from" && dispatch(companyPickedFrom(newValue));
-    label === "to" && dispatch(companyPickedTo(newValue));
+  function handler(event: any, value: string, label: string) {
+    const index = event.target.getAttribute('data-option-index');
+    label === "from" && dispatch(companyPickedFrom({value, index }));
+    label === "to" && dispatch(companyPickedTo({value, index }));
   }
 
   return (

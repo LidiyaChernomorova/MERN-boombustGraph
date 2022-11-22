@@ -26,7 +26,7 @@ export function makeLayout(range: number[] | null): Partial<Layout> {
     margin: {
       t: 0,
       b: 120,
-      l: 0,
+      l: 10,
       r: 35,
       pad: 0,
     },

@@ -26,7 +26,7 @@ export default function SimpleDialog(props: SimpleDialogProps) {
   }, [noteParams]);
 
   return (
-    <Dialog onClose={handleClose} open={open}>
+    <Dialog onClose={handleClose} open={open} fullWidth maxWidth="sm">
       <DialogTitle>Change note for {noteParams.name}</DialogTitle>
       <TextField
         sx={{ m: 2 }}
@@ -36,8 +36,20 @@ export default function SimpleDialog(props: SimpleDialogProps) {
         value={note}
         onChange={(e) => setNote(e.target.value)}
       />
-      <Button onClick={handleSave}>change note</Button>
-      <Button onClick={handleClose}>cancel</Button>
+      <div
+        style={{
+          margin: "20px",
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <Button variant="contained" onClick={handleSave}>
+          change note
+        </Button>
+        <Button variant="contained" onClick={handleClose} sx={{ ml: 1 }}>
+          cancel
+        </Button>
+      </div>
     </Dialog>
   );
 }

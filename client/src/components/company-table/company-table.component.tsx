@@ -23,14 +23,12 @@ import { tableDataStart } from "../../store/data/data.action";
 import SimpleDialog from "../../dialog-popup/dialog.component";
 
 function CompanyTable() {
-
-
   const [open, setOpen] = useState(false);
-  const [pickedNote, setPickedNote] = useState({name: '', note: ''});
+  const [pickedNote, setPickedNote] = useState({ name: "", note: "" });
 
   const handleClose = (value: string) => {
     setOpen(false);
-   // setPickedNote(value);
+    // setPickedNote(value);
   };
 
   const dispatch = useDispatch();
@@ -43,7 +41,7 @@ function CompanyTable() {
 
   function editNote(event: any, name: string, note: string) {
     event.stopPropagation();
-    setPickedNote({name, note});
+    setPickedNote({ name, note });
     setOpen(true);
   }
 
@@ -98,7 +96,17 @@ function CompanyTable() {
                   {row.date ? row.date[0] + " - " + row.date[1] : "no data"}
                 </TableCell>
                 <TableCell sx={trStyle} align="right">
-                  {row.note}
+                  <div
+                    style={{
+                      display: "inline-block",
+                      textOverflow: "ellipsis",
+                      overflow: "hidden",
+                      width: "100px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {row.note}
+                  </div>
                   <Button
                     sx={{ ml: 1 }}
                     onClick={(event) => editNote(event, row.name, row.note)}
@@ -113,11 +121,7 @@ function CompanyTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <SimpleDialog
-        noteParams={pickedNote}
-        open={open}
-        onClose={handleClose}
-      />
+      <SimpleDialog noteParams={pickedNote} open={open} onClose={handleClose} />
     </>
   );
 }

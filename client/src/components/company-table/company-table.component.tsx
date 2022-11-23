@@ -59,7 +59,7 @@ function CompanyTable() {
 
   return (
     <>
-      <TableContainer component={Paper} sx={{ height: 270 }}>
+      <TableContainer component={Paper} sx={{ height: 270, cursor: 'default' }}>
         <Table sx={{ minWidth: 650, maxHeight: 50 }} size="small" stickyHeader>
           <TableHead>
             <TableRow>
@@ -95,26 +95,12 @@ function CompanyTable() {
                 <TableCell sx={trStyle} align="right">
                   {row.date ? row.date[0] + " - " + row.date[1] : "no data"}
                 </TableCell>
-                <TableCell sx={trStyle} align="right">
-                  <div
-                    style={{
-                      display: "inline-block",
-                      textOverflow: "ellipsis",
-                      overflow: "hidden",
-                      width: "100px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {row.note}
-                  </div>
-                  <Button
-                    sx={{ ml: 1 }}
-                    onClick={(event) => editNote(event, row.name, row.note)}
-                    size="small"
-                    variant="outlined"
-                  >
-                    edit
-                  </Button>
+                <TableCell
+                  sx={{...trStyle, cursor: 'pointer'}}
+                  align="right"
+                  onClick={(event) => editNote(event, row.name, row.note)}
+                >
+                  {row.note}
                 </TableCell>
               </TableRow>
             ))}

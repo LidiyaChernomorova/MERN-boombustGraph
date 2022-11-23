@@ -1,4 +1,11 @@
-import { takeLatest, all, call, put, takeEvery } from "redux-saga/effects";
+import {
+  takeLatest,
+  all,
+  call,
+  put,
+  takeEvery,
+  select,
+} from "redux-saga/effects";
 import api from "../../api";
 import TableData from "../../interfaces/table-data.interface";
 import MetaDataResp from "../../interfaces/meta-data-resp.interface";
@@ -14,6 +21,7 @@ import {
 import { ACTION_TYPES } from "./data.type";
 import CompanyData from "../../interfaces/company-data.interface";
 import Action from "../../interfaces/action.interface";
+import { selectPikedCompanyFrom } from "./data.selector";
 
 async function getMetaData(): Promise<TableData[]> {
   const { data } = await api.getMetaData();
@@ -67,6 +75,15 @@ function* companyPickedName(action: Action) {
   yield put(companyDataStart(action.payload));
 }
 
+function* companyPickedToChange(action: Action) {
+  const from: { value: string; index: number } = yield select(
+    selectPikedCompanyFrom
+  );
+  if (Date.parse(from.value) < Date.parse(action.payload)) {
+    yield put(companyPickedTo(action.payload));
+  }
+}
+
 export function* onGetCompanyDataStart() {
   yield takeLatest(ACTION_TYPES.COMPANY.START, companyData);
 }
@@ -76,10 +93,11 @@ export function* onGetMetaDataStart() {
 }
 
 export function* onGetcompanyPickedName() {
-  yield takeEvery(
-    ACTION_TYPES.COMPANY.PICKED_NAME,
-    companyPickedName
-  );
+  yield takeEvery(ACTION_TYPES.COMPANY.PICKED_NAME, companyPickedName);
+}
+
+export function* onCompanyPickedFrom() {
+  yield takeEvery(ACTION_TYPES.COMPANY.PICKED_FROM, companyPickedToChange);
 }
 
 export function* dataSaga() {
@@ -87,5 +105,6 @@ export function* dataSaga() {
     call(onGetMetaDataStart),
     call(onGetCompanyDataStart),
     call(onGetcompanyPickedName),
+    call(onCompanyPickedFrom),
   ]);
 }

@@ -21,13 +21,30 @@ export default function AutocompleteInput({
   const selectedOptionFrom = useSelector(selectPikedCompanyFrom);
   const selectedOptionTo = useSelector(selectPikedCompanyTo);
 
+  function toValueSmallerThanFrom(option: string): boolean {
+    return Date.parse(option) < Date.parse(selectedOptionFrom.value);
+  }
+
   useEffect(() => {
     companyPicked && setOptions(companyPicked.DATE);
   }, [companyPicked]);
 
   useEffect(() => {
-    setValue(label === "from" ? selectedOptionFrom.value : selectedOptionTo.value);
+    setValue(
+      label === "from" ? selectedOptionFrom.value : selectedOptionTo.value
+    );
   }, [selectedOptionFrom, selectedOptionTo]);
+
+  useEffect(() => {
+    if (
+      value &&
+      label === "to" &&
+      toValueSmallerThanFrom(selectedOptionTo.value)
+    ) {
+      const fromValueIndex = selectedOptionFrom.index;
+      setValue(options[fromValueIndex]);
+    }
+  }, [selectedOptionFrom]);
 
   return (
     <Autocomplete
@@ -43,6 +60,10 @@ export default function AutocompleteInput({
         setInputValue(newInputValue);
       }}
       options={options}
+      getOptionDisabled={(option) =>
+        (label === "to" && (selectedOptionFrom.value === option || toValueSmallerThanFrom(option))) || 
+        (label === "from" && (selectedOptionTo.value === option))
+      }
       sx={{ width: 180 }}
       renderInput={(params) => <TextField {...params} label={label} />}
     />

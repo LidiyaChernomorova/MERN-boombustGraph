@@ -51,7 +51,7 @@ updateNote = async (req, res) => {
     note.note = body.note;
     note
       .save()
-      .then((x) => {
+      .then(() => {
         return res.status(200).json({
           id: note._id,
           message: "Note updated!",

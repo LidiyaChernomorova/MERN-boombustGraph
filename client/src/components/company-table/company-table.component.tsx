@@ -40,7 +40,7 @@ function CompanyTable() {
   const trStyle = { borderColor: grey[700] };
 
   function saveNoteDialog(noteText: string) {
-    console.log(pickedNote)
+    console.log(pickedNote);
     setOpen(false);
     if (pickedNote?._id) {
       apis
@@ -49,6 +49,15 @@ function CompanyTable() {
           dispatch(noteDataStart());
         })
         .catch(console.error);
+
+      if (pickedNote.note === "") {
+        apis
+          .deleteNoteById(pickedNote._id)
+          .then(() => {
+            dispatch(noteDataStart());
+          })
+          .catch(console.error);
+      }
     } else {
       pickedTableData &&
         apis

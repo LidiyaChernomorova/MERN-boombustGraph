@@ -23,16 +23,12 @@ import { tableDataStart, noteDataStart } from "../../store/data/data.action";
 import ChangeNoteDialog from "../../dialogs/change-note.dialog";
 import NoteData from "../../interfaces/notes-data.interface";
 import TableData from "../../interfaces/table-data.interface";
+import apis from "../../api";
 
 function CompanyTable() {
   const [open, setOpen] = useState(false);
   const [pickedTableData, setPickedTableData] = useState<TableData>();
   const [pickedNote, setPickedNote] = useState<NoteData>();
-
-  const handleClose = (value: string) => {
-    setOpen(false);
-    // setPickedNote(value);
-  };
 
   const dispatch = useDispatch();
   const tabledata = useSelector(selectTableData);
@@ -42,6 +38,19 @@ function CompanyTable() {
 
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
   const trStyle = { borderColor: grey[700] };
+
+  function saveNoteDialog(noteText: string) {
+    setOpen(false);
+
+    pickedTableData &&
+      apis
+        .addNote(noteText, pickedTableData.asset)
+        .then(() => {
+          dispatch(noteDataStart());
+        })
+        .catch(console.error);
+  }
+
 
   function editNote(
     event: any,
@@ -129,7 +138,8 @@ function CompanyTable() {
         tableData={pickedTableData}
         noteData={pickedNote}
         open={open}
-        onClose={handleClose}
+        cancel={()=> setOpen(false)}
+        save={saveNoteDialog}
       />
     </>
   );

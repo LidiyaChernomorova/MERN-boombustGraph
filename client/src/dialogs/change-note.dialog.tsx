@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button, DialogTitle, Dialog } from "@mui/material";
 import TableData from "../interfaces/table-data.interface";
 import NoteData from "../interfaces/notes-data.interface";
+import apis from "../api";
 
 function makeNewNote(asset: string): NoteData {
   return {
     asset,
     note: "",
-    id: null,
+    _id: null,
   };
 }
 interface props {
@@ -17,17 +18,35 @@ interface props {
   onClose: (value: string) => void;
 }
 
-export default function ChangeNoteDialog(props: props) {
-  const { onClose, tableData, noteData, open } = props;
-  const [note, setNote] = useState(
-    noteData || makeNewNote(tableData?.asset || "no asset")
-  );
+export default function ChangeNoteDialog({
+  onClose,
+  tableData,
+  noteData,
+  open,
+}: props) {
+  const [note, setNote] = useState<NoteData>();
+
+  useEffect(() => {
+    setNote(noteData || makeNewNote(tableData?.asset || "no asset"));
+  }, [noteData, tableData]);
+
+  function handleChange(event: any): void {
+    note &&
+      setNote(() => {
+        return { ...note, note: event.target.value };
+      });
+  }
 
   function handleClose(): void {
-    onClose(note.note);
+    note && onClose(note.note);
   }
 
   function handleSave(): void {
+    note && apis
+      .addNote(note.note, note.asset)
+      .then((x) => console.log(x.data.id))
+      .catch(console.error);
+
     //onClose(note.note);
   }
 
@@ -39,12 +58,8 @@ export default function ChangeNoteDialog(props: props) {
         multiline={true}
         minRows={3}
         placeholder="Type smth"
-        value={note.note}
-        onChange={(e) =>
-          setNote((prevState) => {
-            return { ...prevState, note: e.target.value };
-          })
-        }
+        value={note?.note}
+        onChange={handleChange}
       />
       <div
         style={{
@@ -54,7 +69,7 @@ export default function ChangeNoteDialog(props: props) {
         }}
       >
         <Button color="success" variant="outlined" onClick={handleSave}>
-          change note
+          {note?._id ? "change note" : "add note"}
         </Button>
         <Button
           color="error"

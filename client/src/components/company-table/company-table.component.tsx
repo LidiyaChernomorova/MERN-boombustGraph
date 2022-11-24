@@ -49,8 +49,7 @@ function CompanyTable() {
           dispatch(noteDataStart());
         })
         .catch(console.error);
-
-      if (pickedNote.note === "") {
+      if (noteText === "") {
         apis
           .deleteNoteById(pickedNote._id)
           .then(() => {

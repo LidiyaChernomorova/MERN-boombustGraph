@@ -28,23 +28,18 @@ export default function ChangeNoteDialog({
     setNoteText(event.target.value);
   }
 
-  function handleSave(event: any): void {
-    setNoteText('');
+  function handleSave(): void {
     save(noteText);
+    setNoteText("");
   }
 
-  function handleCancel(event: any): void {
-    setNoteText('');
+  function handleCancel(): void {
     cancel(noteText);
+    setNoteText("");
   }
 
   return (
-    <Dialog
-      onClose={handleCancel}
-      open={open}
-      fullWidth
-      maxWidth="sm"
-    >
+    <Dialog onClose={handleCancel} open={open} fullWidth maxWidth="sm">
       <DialogTitle>Change note for {tableData?.name}</DialogTitle>
       <TextField
         sx={{ ml: 2, mr: 2 }}
@@ -61,12 +56,12 @@ export default function ChangeNoteDialog({
           justifyContent: "flex-end",
         }}
       >
-        <Button
-          color="success"
-          variant="outlined"
-          onClick={handleSave}
-        >
-          {noteData?._id ? "change note" : "add note"}
+        <Button color="success" variant="outlined" onClick={handleSave}>
+          {noteData?._id
+            ? noteText === ""
+              ? "delete note"
+              : "change note"
+            : "add note"}
         </Button>
         <Button
           color="error"

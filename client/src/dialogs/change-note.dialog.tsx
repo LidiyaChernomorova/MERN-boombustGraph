@@ -28,9 +28,19 @@ export default function ChangeNoteDialog({
     setNoteText(event.target.value);
   }
 
+  function handleSave(event: any): void {
+    setNoteText('');
+    save(noteText);
+  }
+
+  function handleCancel(event: any): void {
+    setNoteText('');
+    cancel(noteText);
+  }
+
   return (
     <Dialog
-      onClose={() => cancel(noteText)}
+      onClose={handleCancel}
       open={open}
       fullWidth
       maxWidth="sm"
@@ -54,14 +64,14 @@ export default function ChangeNoteDialog({
         <Button
           color="success"
           variant="outlined"
-          onClick={() => save(noteText)}
+          onClick={handleSave}
         >
           {noteData?._id ? "change note" : "add note"}
         </Button>
         <Button
           color="error"
           variant="outlined"
-          onClick={() => cancel(noteText)}
+          onClick={handleCancel}
           sx={{ ml: 1 }}
         >
           cancel

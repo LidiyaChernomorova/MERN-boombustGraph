@@ -47,11 +47,11 @@ updateNote = async (req, res) => {
         message: "Note not found!",
       });
     }
-    note.asset = body.asset;
-    note.text = body.text;
+
+    note.note = body.note;
     note
       .save()
-      .then(() => {
+      .then((x) => {
         return res.status(200).json({
           id: note._id,
           message: "Note updated!",

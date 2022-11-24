@@ -17,15 +17,17 @@ import {
   selectTableData,
   selectTableDataIsLoading,
   selectPikedCompanyName,
-  selectTableDataNotes
+  selectTableDataNotes,
 } from "../../store/data/data.selector";
 import { tableDataStart, noteDataStart } from "../../store/data/data.action";
 import ChangeNoteDialog from "../../dialogs/change-note.dialog";
 import NoteData from "../../interfaces/notes-data.interface";
+import TableData from "../../interfaces/table-data.interface";
 
 function CompanyTable() {
   const [open, setOpen] = useState(false);
-  const [pickedNote, setPickedNote] = useState({ name: "", note: "" });
+  const [pickedTableData, setPickedTableData] = useState<TableData>();
+  const [pickedNote, setPickedNote] = useState<NoteData>();
 
   const handleClose = (value: string) => {
     setOpen(false);
@@ -41,9 +43,14 @@ function CompanyTable() {
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
   const trStyle = { borderColor: grey[700] };
 
-  function editNote(event: any, name: string, noteData: NoteData | undefined) {
+  function editNote(
+    event: any,
+    tableData: TableData,
+    noteData: NoteData | undefined
+  ) {
     event.stopPropagation();
-    setPickedNote({ name, note: noteData?.note || '' });
+    setPickedTableData(tableData);
+    setPickedNote(noteData);
     setOpen(true);
   }
 
@@ -80,7 +87,9 @@ function CompanyTable() {
           </TableHead>
           <TableBody>
             {tabledata.map((data) => {
-              const noteData = tableDataNotes.find((note) => note.asset === data.asset);
+              const noteData = tableDataNotes.find(
+                (note) => note.asset === data.asset
+              );
 
               return (
                 <TableRow
@@ -106,9 +115,9 @@ function CompanyTable() {
                   <TableCell
                     sx={{ ...trStyle, cursor: "pointer" }}
                     align="right"
-                    onClick={(event) => editNote(event, data.name, noteData)}
+                    onClick={(event) => editNote(event, data, noteData)}
                   >
-                    {noteData?.note || ''}
+                    {noteData?.note || ""}
                   </TableCell>
                 </TableRow>
               );
@@ -117,7 +126,8 @@ function CompanyTable() {
         </Table>
       </TableContainer>
       <ChangeNoteDialog
-        noteParams={pickedNote}
+        tableData={pickedTableData}
+        noteData={pickedNote}
         open={open}
         onClose={handleClose}
       />

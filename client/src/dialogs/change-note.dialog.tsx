@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { TextField, Button, DialogTitle, Dialog } from "@mui/material";
+import TableData from "../interfaces/table-data.interface";
+import NoteData from "../interfaces/notes-data.interface";
 
-export interface SimpleDialogProps {
+function makeNewNote(asset: string): NoteData {
+  return {
+    asset,
+    note: "",
+    id: null,
+  };
+}
+interface props {
   open: boolean;
-  noteParams: { name: string; note: string };
+  tableData: TableData | undefined;
+  noteData: NoteData | undefined;
   onClose: (value: string) => void;
 }
 
-export default function ChangeNoteDialog(props: SimpleDialogProps) {
-  const { onClose, noteParams, open } = props;
-  const [note, setNote] = useState(noteParams.note);
+export default function ChangeNoteDialog(props: props) {
+  const { onClose, tableData, noteData, open } = props;
+  const [note, setNote] = useState(noteData || makeNewNote(tableData?.asset || 'no asset'));
 
   function handleClose() {
-    onClose(noteParams.note);
+      onClose(note.note);
   }
 
   function handleListItemClick(value: string) {
@@ -21,20 +31,20 @@ export default function ChangeNoteDialog(props: SimpleDialogProps) {
 
   function handleSave() {}
 
-  useEffect(() => {
-    setNote(noteParams.note);
-  }, [noteParams]);
-
   return (
     <Dialog onClose={handleClose} open={open} fullWidth maxWidth="sm">
-      <DialogTitle>Change note for {noteParams.name}</DialogTitle>
+      <DialogTitle>Change note for {tableData?.name}</DialogTitle>
       <TextField
         sx={{ ml: 2, mr: 2 }}
         multiline={true}
         minRows={3}
         placeholder="Type smth"
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
+        value={note.note}
+        onChange={(e) =>
+          setNote((prevState) => {
+            return { ...prevState, note: e.target.value };
+          })
+        }
       />
       <div
         style={{
@@ -46,7 +56,12 @@ export default function ChangeNoteDialog(props: SimpleDialogProps) {
         <Button color="success" variant="outlined" onClick={handleSave}>
           change note
         </Button>
-        <Button color="error" variant="outlined" onClick={handleClose} sx={{ ml: 1 }}>
+        <Button
+          color="error"
+          variant="outlined"
+          onClick={handleClose}
+          sx={{ ml: 1 }}
+        >
           cancel
         </Button>
       </div>

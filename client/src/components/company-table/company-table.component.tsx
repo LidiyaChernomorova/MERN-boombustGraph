@@ -8,7 +8,6 @@ import {
   TableRow,
   Paper,
   Card,
-  Button,
 } from "@mui/material";
 import { grey, brown } from "@mui/material/colors";
 import { companyPickedName } from "../../store/data/data.action";
@@ -18,9 +17,11 @@ import {
   selectTableData,
   selectTableDataIsLoading,
   selectPikedCompanyName,
+  selectTableDataNotes
 } from "../../store/data/data.selector";
-import { tableDataStart } from "../../store/data/data.action";
-import SimpleDialog from "../../dialog-popup/dialog.component";
+import { tableDataStart, noteDataStart } from "../../store/data/data.action";
+import ChangeNoteDialog from "../../dialogs/change-note.dialog";
+import NoteData from "../../interfaces/notes-data.interface";
 
 function CompanyTable() {
   const [open, setOpen] = useState(false);
@@ -32,16 +33,17 @@ function CompanyTable() {
   };
 
   const dispatch = useDispatch();
-  const rows = useSelector(selectTableData);
+  const tabledata = useSelector(selectTableData);
+  const tableDataNotes = useSelector(selectTableDataNotes);
   const isLoading = useSelector(selectTableDataIsLoading);
   const pickedName = useSelector(selectPikedCompanyName);
 
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
   const trStyle = { borderColor: grey[700] };
 
-  function editNote(event: any, name: string, note: string) {
+  function editNote(event: any, name: string, noteData: NoteData | undefined) {
     event.stopPropagation();
-    setPickedNote({ name, note });
+    setPickedNote({ name, note: noteData?.note || '' });
     setOpen(true);
   }
 
@@ -51,6 +53,7 @@ function CompanyTable() {
 
   useEffect(() => {
     dispatch(tableDataStart());
+    dispatch(noteDataStart());
   }, []);
 
   if (isLoading) {
@@ -59,7 +62,7 @@ function CompanyTable() {
 
   return (
     <>
-      <TableContainer component={Paper} sx={{ height: 270, cursor: 'default' }}>
+      <TableContainer component={Paper} sx={{ height: 270, cursor: "default" }}>
         <Table sx={{ minWidth: 650, maxHeight: 50 }} size="small" stickyHeader>
           <TableHead>
             <TableRow>
@@ -76,38 +79,48 @@ function CompanyTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                hover
-                style={
-                  row.asset === pickedName ? { background: brown[500] } : {}
-                }
-                onClick={() => pickCompany(row.asset)}
-                key={row.asset}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell sx={trStyle} component="th" scope="row">
-                  {row.asset}
-                </TableCell>
-                <TableCell sx={trStyle} align="right">
-                  {row.name}
-                </TableCell>
-                <TableCell sx={trStyle} align="right">
-                  {row.date ? row.date[0] + " - " + row.date[1] : "no data"}
-                </TableCell>
-                <TableCell
-                  sx={{...trStyle, cursor: 'pointer'}}
-                  align="right"
-                  onClick={(event) => editNote(event, row.name, row.note)}
+            {tabledata.map((data) => {
+              const noteData = tableDataNotes.find((note) => note.asset === data.asset);
+
+              return (
+                <TableRow
+                  hover
+                  style={
+                    data.asset === pickedName ? { background: brown[500] } : {}
+                  }
+                  onClick={() => pickCompany(data.asset)}
+                  key={data.asset}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  {row.note}
-                </TableCell>
-              </TableRow>
-            ))}
+                  <TableCell sx={trStyle} component="th" scope="row">
+                    {data.asset}
+                  </TableCell>
+                  <TableCell sx={trStyle} align="right">
+                    {data.name}
+                  </TableCell>
+                  <TableCell sx={trStyle} align="right">
+                    {data.date
+                      ? data.date[0] + " - " + data.date[1]
+                      : "no data"}
+                  </TableCell>
+                  <TableCell
+                    sx={{ ...trStyle, cursor: "pointer" }}
+                    align="right"
+                    onClick={(event) => editNote(event, data.name, noteData)}
+                  >
+                    {noteData?.note || ''}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
-      <SimpleDialog noteParams={pickedNote} open={open} onClose={handleClose} />
+      <ChangeNoteDialog
+        noteParams={pickedNote}
+        open={open}
+        onClose={handleClose}
+      />
     </>
   );
 }

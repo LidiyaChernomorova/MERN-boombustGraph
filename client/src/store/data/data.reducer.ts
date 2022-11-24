@@ -4,6 +4,8 @@ import Action from "../../interfaces/action.interface";
 
 const USER_INITIAL_STATE: DataStore = {
   tableData: [],
+  tableDataNotes: [],
+  notesIsLoading: false,
   tableIsLoading: false,
   companyIsLoading: false,
   companyPicked: null,
@@ -16,6 +18,12 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
   const { type, payload } = action;
 
   switch (type) {
+    case ACTION_TYPES.NOTE.START:
+      return { ...state, notesIsLoading: true };
+    case ACTION_TYPES.NOTE.SUCCESS:
+      return { ...state, tableDataNotes: payload, notesIsLoading: false };
+    case ACTION_TYPES.NOTE.FAILED:
+      return { ...state, error: payload, notesIsLoading: false };
     case ACTION_TYPES.META.START:
       return { ...state, tableIsLoading: true };
     case ACTION_TYPES.META.SUCCESS:

@@ -1,10 +1,4 @@
-import {
-  takeLatest,
-  all,
-  call,
-  put,
-  takeEvery,
-} from "redux-saga/effects";
+import { takeLatest, all, call, put, takeEvery } from "redux-saga/effects";
 import api from "../../api";
 import TableData from "../../interfaces/table-data.interface";
 import MetaDataResp from "../../interfaces/meta-data-resp.interface";
@@ -16,19 +10,29 @@ import {
   companyDataFailed,
   companyPickedFrom,
   companyPickedTo,
+  noteDataFailed,
+  noteDataSuccess,
 } from "./data.action";
 import { ACTION_TYPES } from "./data.type";
 import CompanyData from "../../interfaces/company-data.interface";
 import Action from "../../interfaces/action.interface";
+import NoteData from "../../interfaces/notes-data.interface";
 
 async function getMetaData(): Promise<TableData[]> {
   const { data } = await api.getMetaData();
+
+  //await api.addNote({note: 'test note for dis', asset: 'DIS'});
+
   return createTableData(data);
 }
 
 async function getCompanyData(companyName: string): Promise<CompanyData> {
   const { data } = await api.getCompanyData(companyName);
   return data;
+}
+async function getNotes(): Promise<NoteData[]> {
+  const { data } = await api.getAllNotes();
+  return data.notes;
 }
 
 function createTableData(metaData: MetaDataResp): TableData[] {
@@ -39,7 +43,6 @@ function createTableData(metaData: MetaDataResp): TableData[] {
       asset,
       name: metaData.FULL_NAMES[asset],
       date: intervales[asset] || null,
-      note: "ololo",
     };
   });
 }
@@ -50,6 +53,15 @@ function* tableData() {
     yield put(tableDataSuccess(data));
   } catch (error: any) {
     yield put(tableDataFailed(error));
+  }
+}
+function* noteData() {
+  try {
+    const data: NoteData[] = yield call(getNotes);
+    console.log(data)
+    yield put(noteDataSuccess(data));
+  } catch (error: any) {
+    yield put(noteDataFailed(error));
   }
 }
 
@@ -81,14 +93,19 @@ export function* onGetMetaDataStart() {
   yield takeLatest(ACTION_TYPES.META.START, tableData);
 }
 
-export function* onGetcompanyPickedName() {
+export function* onGetСompanyPickedName() {
   yield takeEvery(ACTION_TYPES.COMPANY.PICKED_NAME, companyPickedName);
+}
+
+export function* onGetNoteData() {
+  yield takeLatest(ACTION_TYPES.NOTE.START, noteData);
 }
 
 export function* dataSaga() {
   yield all([
     call(onGetMetaDataStart),
     call(onGetCompanyDataStart),
-    call(onGetcompanyPickedName),
+    call(onGetNoteData),
+    call(onGetСompanyPickedName),
   ]);
 }

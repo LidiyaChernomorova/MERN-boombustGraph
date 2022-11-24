@@ -1,6 +1,7 @@
 import { ACTION_TYPES } from "./data.type";
 import createAction from "../../helpers/create-action";
 import TableData from "../../interfaces/table-data.interface";
+import NoteData from "../../interfaces/notes-data.interface";
 
 export function tableDataStart() {
   return createAction(ACTION_TYPES.META.START);
@@ -15,6 +16,23 @@ export function tableDataSuccess(tableData: TableData) {
 
 export function tableDataFailed(error: Error) {
   return createAction<Error>(ACTION_TYPES.META.FAILED, error);
+}
+
+
+
+export function noteDataStart() {
+  return createAction(ACTION_TYPES.NOTE.START);
+}
+
+export function noteDataSuccess(noteData: NoteData[]) {
+  return createAction<NoteData[]>(
+    ACTION_TYPES.NOTE.SUCCESS,
+    noteData
+  );
+}
+
+export function noteDataFailed(error: Error) {
+  return createAction<Error>(ACTION_TYPES.NOTE.FAILED, error);
 }
 
 export function companyDataStart(companyName: string) {

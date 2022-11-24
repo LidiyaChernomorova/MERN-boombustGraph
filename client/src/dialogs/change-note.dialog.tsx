@@ -7,7 +7,7 @@ export interface SimpleDialogProps {
   onClose: (value: string) => void;
 }
 
-export default function SimpleDialog(props: SimpleDialogProps) {
+export default function ChangeNoteDialog(props: SimpleDialogProps) {
   const { onClose, noteParams, open } = props;
   const [note, setNote] = useState(noteParams.note);
 
@@ -29,7 +29,7 @@ export default function SimpleDialog(props: SimpleDialogProps) {
     <Dialog onClose={handleClose} open={open} fullWidth maxWidth="sm">
       <DialogTitle>Change note for {noteParams.name}</DialogTitle>
       <TextField
-        sx={{ m: 2 }}
+        sx={{ ml: 2, mr: 2 }}
         multiline={true}
         minRows={3}
         placeholder="Type smth"
@@ -43,10 +43,10 @@ export default function SimpleDialog(props: SimpleDialogProps) {
           justifyContent: "flex-end",
         }}
       >
-        <Button variant="contained" onClick={handleSave}>
+        <Button color="success" variant="outlined" onClick={handleSave}>
           change note
         </Button>
-        <Button variant="contained" onClick={handleClose} sx={{ ml: 1 }}>
+        <Button color="error" variant="outlined" onClick={handleClose} sx={{ ml: 1 }}>
           cancel
         </Button>
       </div>

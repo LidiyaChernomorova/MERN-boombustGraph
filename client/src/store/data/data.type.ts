@@ -12,4 +12,9 @@ export const ACTION_TYPES = {
       PICKED_FROM: "data: get companyPicked From",
       PICKED_TO: "data: get companyPicked To",
     },
+    NOTE: {
+      START: "data: get noteStart",
+      SUCCESS: "data: get noteSuccess",
+      FAILED: "data: get noteFailed",
+    }
 };

@@ -1,6 +1,7 @@
 import Store from "../../interfaces/store.interface";
 
 export const selectTableData = (store: Store) => store.data.tableData;
+export const selectTableDataNotes = (store: Store) => store.data.tableDataNotes;
 export const selectTableDataIsLoading = (store: Store) => store.data.tableIsLoading;
 export const selectCompanyDataIsLoading = (store: Store) => store.data.companyIsLoading;
 export const selectPikedCompanyName = (store: Store) =>

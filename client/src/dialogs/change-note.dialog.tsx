@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TextField, Button, DialogTitle, Dialog } from "@mui/material";
 import TableData from "../interfaces/table-data.interface";
 import NoteData from "../interfaces/notes-data.interface";
@@ -19,17 +19,17 @@ interface props {
 
 export default function ChangeNoteDialog(props: props) {
   const { onClose, tableData, noteData, open } = props;
-  const [note, setNote] = useState(noteData || makeNewNote(tableData?.asset || 'no asset'));
+  const [note, setNote] = useState(
+    noteData || makeNewNote(tableData?.asset || "no asset")
+  );
 
-  function handleClose() {
-      onClose(note.note);
+  function handleClose(): void {
+    onClose(note.note);
   }
 
-  function handleListItemClick(value: string) {
-    onClose(value);
+  function handleSave(): void {
+    //onClose(note.note);
   }
-
-  function handleSave() {}
 
   return (
     <Dialog onClose={handleClose} open={open} fullWidth maxWidth="sm">

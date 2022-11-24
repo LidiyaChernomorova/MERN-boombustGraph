@@ -8,9 +8,9 @@ export const ACTION_TYPES = {
       START: "data: get companyDataStart",
       SUCCESS: "data: get companyDataSuccess",
       FAILED: "data: get companyDataFailed",
-      PICKED_NAME: "data: get companyPicked Name",
-      PICKED_FROM: "data: get companyPicked From",
-      PICKED_TO: "data: get companyPicked To",
+      PICKED_NAME: "data: companyPicked Name",
+      PICKED_FROM: "data: companyPicked From",
+      PICKED_TO: "data: companyPicked To",
     },
     NOTE: {
       START: "data: get noteStart",

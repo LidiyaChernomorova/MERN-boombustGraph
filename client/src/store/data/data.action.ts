@@ -3,6 +3,8 @@ import createAction from "../../helpers/create-action";
 import TableData from "../../interfaces/table-data.interface";
 import NoteData from "../../interfaces/notes-data.interface";
 
+
+// TABLE
 export function tableDataStart() {
   return createAction(ACTION_TYPES.META.START);
 }
@@ -19,15 +21,15 @@ export function tableDataFailed(error: Error) {
 }
 
 
-
+// NOTE
 export function noteDataStart() {
   return createAction(ACTION_TYPES.NOTE.START);
 }
 
-export function noteDataSuccess(noteData: NoteData[]) {
+export function noteDataSuccess(notesData: NoteData[]) {
   return createAction<NoteData[]>(
     ACTION_TYPES.NOTE.SUCCESS,
-    noteData
+    notesData
   );
 }
 
@@ -35,6 +37,8 @@ export function noteDataFailed(error: Error) {
   return createAction<Error>(ACTION_TYPES.NOTE.FAILED, error);
 }
 
+
+// COMPANY
 export function companyDataStart(companyName: string) {
   return createAction<string>(
     ACTION_TYPES.COMPANY.START,

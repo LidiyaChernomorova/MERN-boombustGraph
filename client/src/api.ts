@@ -7,10 +7,10 @@ const api = axios.create({
 
 // NOTES
 export const addNote = (note: string, asset: string) =>
-  api.post(`/note`, {note, asset});
+  api.post(`/note`, { note, asset });
 export const getAllNotes = () => api.get(`/notes`);
 export const updateNoteById = (id: string, note: string) =>
-  api.put(`/note/${id}`, note);
+  api.put(`/note/${id}`, { note });
 export const deleteNoteById = (id: string) => api.delete(`/note/${id}`);
 
 // COMPANIES

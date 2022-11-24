@@ -40,17 +40,25 @@ function CompanyTable() {
   const trStyle = { borderColor: grey[700] };
 
   function saveNoteDialog(noteText: string) {
+    console.log(pickedNote)
     setOpen(false);
-
-    pickedTableData &&
+    if (pickedNote?._id) {
       apis
-        .addNote(noteText, pickedTableData.asset)
+        .updateNoteById(pickedNote._id, noteText)
         .then(() => {
           dispatch(noteDataStart());
         })
         .catch(console.error);
+    } else {
+      pickedTableData &&
+        apis
+          .addNote(noteText, pickedTableData.asset)
+          .then(() => {
+            dispatch(noteDataStart());
+          })
+          .catch(console.error);
+    }
   }
-
 
   function editNote(
     event: any,
@@ -138,7 +146,7 @@ function CompanyTable() {
         tableData={pickedTableData}
         noteData={pickedNote}
         open={open}
-        cancel={()=> setOpen(false)}
+        cancel={() => setOpen(false)}
         save={saveNoteDialog}
       />
     </>

@@ -6,7 +6,6 @@ const tableStyles = {
     "-webkit-line-clamp": 1,
     "-webkit-box-orient": "vertical",
   lineHeight: '22px',
-  paddingRight: '30px'
   },
   row: {
     display: 'grid',

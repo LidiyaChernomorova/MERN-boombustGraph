@@ -14,7 +14,7 @@ import {
 } from "../../store/data/data.selector";
 
 function Graph() {
-  const [data, setData] = useState<Partial<OhclData>[] | null>(null);
+  const [data, setData] = useState<Partial<OhclData> | null>(null);
   const [layout, setLayout] = useState<Partial<Layout> | null>(null);
   const companyPicked = useSelector(selectPikedCompany);
   const companyPickedName = useSelector(selectPikedCompanyName);
@@ -24,7 +24,7 @@ function Graph() {
 
   useEffect(() => {
     if (companyPickedFrom && companyPickedTo) {
-      setLayout(makeLayout([companyPickedFrom.index, companyPickedTo.index]));
+      setLayout(makeLayout([+companyPickedFrom.index, +companyPickedTo.index]));
     } else {
       setLayout(makeLayout(null));
     }
@@ -50,7 +50,7 @@ function Graph() {
             <DateRangePicker />
           </div>
           <Plot
-            data={data}
+            data={[data]}
             layout={layout}
             config={config}
             useResizeHandler={true}

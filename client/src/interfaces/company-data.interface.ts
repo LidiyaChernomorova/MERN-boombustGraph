@@ -1,8 +1,8 @@
 export default interface CompanyData {
-  CLOSE: string[];
+  CLOSE: number[];
   DATE: string[];
-  HIGH: string[];
-  LOW: string[];
-  OPEN: string[];
-  VOLUME: string[];
+  HIGH: number[];
+  LOW: number[];
+  OPEN: number[];
+  VOLUME: number[];
 }

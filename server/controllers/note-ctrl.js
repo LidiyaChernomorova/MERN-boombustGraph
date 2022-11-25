@@ -72,9 +72,10 @@ deleteNote = async (req, res) => {
       return res.status(400).json({ error: err });
     }
 
-    if (!note) {
-      return res.status(404).json({ error: `Note not found` });
-    }
+    // sometimes note note found but removed still
+    // if (!note) {
+    //   return res.status(404).json({ error: `Note not found` });
+    // }
 
     return res.status(200).json({ note });
   }).catch((err) => console.log(err));

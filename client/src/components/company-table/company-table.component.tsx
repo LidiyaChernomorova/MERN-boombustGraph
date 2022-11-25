@@ -24,6 +24,8 @@ import ChangeNoteDialog from "../../dialogs/change-note.dialog";
 import NoteData from "../../interfaces/notes-data.interface";
 import TableData from "../../interfaces/table-data.interface";
 import apis from "../../api";
+import { makeStyles } from "@material-ui/core/styles";
+import tableStyles from './company-table.styles'
 
 function CompanyTable() {
   const [open, setOpen] = useState(false);
@@ -38,6 +40,8 @@ function CompanyTable() {
 
   const thStyle = { borderColor: grey[700], bgcolor: "background.paper" };
   const trStyle = { borderColor: grey[700] };
+  const useStyles = makeStyles(tableStyles);
+  const classes = useStyles();
 
   function saveNoteDialog(noteText: string) {
     console.log(pickedNote);
@@ -97,7 +101,7 @@ function CompanyTable() {
       <TableContainer component={Paper} sx={{ height: 270, cursor: "default" }}>
         <Table sx={{ minWidth: 650, maxHeight: 50 }} size="small" stickyHeader>
           <TableHead>
-            <TableRow>
+            <TableRow className={classes.row}>
               <TableCell sx={thStyle}>ASSET</TableCell>
               <TableCell align="right" sx={thStyle}>
                 NAME
@@ -118,6 +122,7 @@ function CompanyTable() {
 
               return (
                 <TableRow
+                className={classes.row}
                   hover
                   style={
                     data.asset === pickedName ? { background: brown[500] } : {}
@@ -138,6 +143,7 @@ function CompanyTable() {
                       : "no data"}
                   </TableCell>
                   <TableCell
+                  className={classes.dotsToCutNote}
                     sx={{ ...trStyle, cursor: "pointer" }}
                     align="right"
                     onClick={(event) => editNote(event, data, noteData)}

@@ -24,7 +24,7 @@ function Graph() {
 
   useEffect(() => {
     if (companyPickedFrom && companyPickedTo) {
-      setLayout(makeLayout([+companyPickedFrom.index, +companyPickedTo.index]));
+      setLayout(makeLayout([companyPickedFrom.value, companyPickedTo.value]));
     } else {
       setLayout(makeLayout(null));
     }

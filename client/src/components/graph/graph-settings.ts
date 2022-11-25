@@ -17,7 +17,7 @@ function parseDateForPlotly(dateAndHour: string): string {
   return result;
 }
 
-export function makeLayout(range: number[] | null): Partial<any> {
+export function makeLayout(range: string[] | null): Partial<any> {
   const defaultSettings: Partial<Layout> = {
     showlegend: false,
     plot_bgcolor: "transparent",
@@ -51,8 +51,15 @@ export function makeLayout(range: number[] | null): Partial<any> {
     },
   };
 
-  return range
-    ? { ...defaultSettings, xaxis: { ...defaultSettings.xaxis, range } }
+  return range && !range.includes('')
+    ? {
+        ...defaultSettings,
+        xaxis: {
+          ...defaultSettings.xaxis,
+          autorange: false,
+          range: range.map((d) => (d ? parseDateForPlotly(d) + ":00" : d)),
+        },
+      }
     : defaultSettings;
 }
 
@@ -72,7 +79,7 @@ export function makeData(data: CompanyData): Partial<OhclData> {
 
   return {
     ...defaultSettings,
-    x: data.DATE.map((d) => parseDateForPlotly(d)),
+    x: data?.DATE && data.DATE.map((d) => parseDateForPlotly(d)),
     open: data.OPEN,
     close: data.CLOSE,
     high: data.HIGH,

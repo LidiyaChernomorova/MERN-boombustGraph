@@ -44,7 +44,7 @@ export function makeLayout(range: string[] | null): Partial<any> {
     },
     margin: {
       t: 0,
-      b: 120,
+      b: 35,
       l: 10,
       r: 35,
       pad: 0,

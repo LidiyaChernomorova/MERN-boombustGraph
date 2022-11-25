@@ -25,7 +25,7 @@ import NoteData from "../../interfaces/notes-data.interface";
 import TableData from "../../interfaces/table-data.interface";
 import apis from "../../api";
 import { makeStyles } from "@material-ui/core/styles";
-import tableStyles from './company-table.styles'
+import tableStyles from "./company-table.styles";
 
 function CompanyTable() {
   const [open, setOpen] = useState(false);
@@ -53,14 +53,6 @@ function CompanyTable() {
           dispatch(noteDataStart());
         })
         .catch(console.error);
-      if (noteText === "") {
-        apis
-          .deleteNoteById(pickedNote._id)
-          .then(() => {
-            dispatch(noteDataStart());
-          })
-          .catch(console.error);
-      }
     } else {
       pickedTableData &&
         apis
@@ -70,6 +62,17 @@ function CompanyTable() {
           })
           .catch(console.error);
     }
+  }
+
+  function removeNoteDialog() {
+    setOpen(false);
+    pickedNote?._id &&
+      apis
+        .deleteNoteById(pickedNote._id)
+        .then(() => {
+          dispatch(noteDataStart());
+        })
+        .catch(console.error);
   }
 
   function editNote(
@@ -122,7 +125,7 @@ function CompanyTable() {
 
               return (
                 <TableRow
-                className={classes.row}
+                  className={classes.row}
                   hover
                   style={
                     data.asset === pickedName ? { background: brown[500] } : {}
@@ -143,7 +146,7 @@ function CompanyTable() {
                       : "no data"}
                   </TableCell>
                   <TableCell
-                  className={classes.dotsToCutNote}
+                    className={classes.dotsToCutNote}
                     sx={{ ...trStyle, cursor: "pointer" }}
                     align="right"
                     onClick={(event) => editNote(event, data, noteData)}
@@ -162,6 +165,7 @@ function CompanyTable() {
         open={open}
         cancel={() => setOpen(false)}
         save={saveNoteDialog}
+        remove={removeNoteDialog}
       />
     </>
   );

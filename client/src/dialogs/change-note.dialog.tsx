@@ -9,6 +9,7 @@ interface props {
   noteData: NoteData | undefined;
   cancel: (value: string) => void;
   save: (value: string) => void;
+  remove: (value: string) => void;
 }
 
 export default function ChangeNoteDialog({
@@ -17,6 +18,7 @@ export default function ChangeNoteDialog({
   noteData,
   cancel,
   save,
+  remove,
 }: props) {
   const [noteText, setNoteText] = useState<string>("");
 
@@ -30,6 +32,10 @@ export default function ChangeNoteDialog({
 
   function handleSave(): void {
     save(noteText);
+    setNoteText("");
+  }
+  function handleRemove(): void {
+    remove(noteText);
     setNoteText("");
   }
 
@@ -54,21 +60,23 @@ export default function ChangeNoteDialog({
           margin: "20px",
           display: "flex",
           justifyContent: "flex-end",
+          gap: '10px'
         }}
       >
-        <Button color="success" variant="outlined" onClick={handleSave}>
-          {noteData?._id
-            ? noteText === ""
-              ? "delete note"
-              : "change note"
-            : "add note"}
-        </Button>
         <Button
-          color="error"
+          color="success"
           variant="outlined"
-          onClick={handleCancel}
-          sx={{ ml: 1 }}
+          onClick={handleSave}
+          disabled={noteText === ""}
         >
+          {noteData?._id ? "change note" : "add note"}
+        </Button>
+        {noteData?._id && (
+          <Button color="error" variant="outlined" onClick={handleRemove}>
+            delete note
+          </Button>
+        )}
+        <Button color="error" variant="outlined" onClick={handleCancel}>
           cancel
         </Button>
       </div>

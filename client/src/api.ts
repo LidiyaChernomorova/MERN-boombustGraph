@@ -1,8 +1,7 @@
 import axios from "axios";
-import NoteData from "./interfaces/notes-data.interface";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "http://localhost:9000/api",
 });
 
 // NOTES

@@ -8,7 +8,7 @@ const noteRouter = require("./routes/note-router");
 const assetsRouter = require("./routes/assets-router");
 
 const app = express();
-const apiPort = 3000;
+const apiPort = 9000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());

@@ -5,6 +5,12 @@ const csv = require("csvtojson");
 
 const csvPath = "assets/companies-data/csv/quarter-hour/";
 const jsonPath = "assets/companies-data/json/quarter-hour/";
+const jsonMainPath = "assets/companies-data/json";
+
+if (!fs.existsSync(jsonPath)) {
+  fs.mkdirSync("./" + jsonMainPath);
+  fs.mkdirSync("./" + jsonPath);
+}
 
 glob(csvPath + "*.csv", {}, async (err, files) => {
   if (err) {
@@ -29,7 +35,6 @@ glob(csvPath + "*.csv", {}, async (err, files) => {
               header = "HIGH";
             }
 
-            
             return {
               ...acc,
               [header]: file.reduce((acc, arr, index) => {

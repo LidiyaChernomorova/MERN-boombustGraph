@@ -46,22 +46,21 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
     case ACTION_TYPES.COMPANY.NAME:
       return { ...state, companyName: payload };
 
-      // COMPARE
-
-      case ACTION_TYPES.COMPANY.COMPARE_START:
-        return { ...state, companyIsLoading: true };
-      case ACTION_TYPES.COMPANY.COMPARE_SUCCESS:
-        return { ...state, companyCompare: payload, companyIsLoading: false };
-      case ACTION_TYPES.COMPANY.COMPARE_FAILED:
-        return { ...state, error: payload, companyIsLoading: false };
+    // COMPARE COMPANY
+    case ACTION_TYPES.COMPARE_COMPANY.START:
+      return { ...state, companyIsLoading: true };
+    case ACTION_TYPES.COMPARE_COMPANY.SUCCESS:
+      return { ...state, companyCompare: payload, companyIsLoading: false };
+    case ACTION_TYPES.COMPARE_COMPANY.FAILED:
+      return { ...state, error: payload, companyIsLoading: false };
+    case ACTION_TYPES.COMPARE_COMPANY.NAME:
+      return { ...state, companyCompareName: payload };
 
     // INPUTS
-    case ACTION_TYPES.COMPANY.FROM:
+    case ACTION_TYPES.INPUT.FROM:
       return { ...state, from: payload };
-    case ACTION_TYPES.COMPANY.TO:
+    case ACTION_TYPES.INPUT.TO:
       return { ...state, to: payload };
-    case ACTION_TYPES.COMPANY.COMPARE_NAME:
-      return { ...state, companyCompareName: payload };
 
     default:
       return state;

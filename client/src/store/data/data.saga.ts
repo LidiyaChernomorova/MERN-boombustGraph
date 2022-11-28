@@ -7,7 +7,7 @@ export function* onCompanyDataStart() {
 }
 
 export function* onСompanyCompareStart() {
-  yield takeLatest(ACTION_TYPES.COMPANY.COMPARE_START, helpers.companyCompareStart);
+  yield takeLatest(ACTION_TYPES.COMPARE_COMPANY.START, helpers.companyCompareStart);
 }
 
 export function* onMetaDataStart() {
@@ -23,7 +23,7 @@ export function* onNoteDataStart() {
 }
 
 export function* onСompanyCompareName() {
-  yield takeEvery(ACTION_TYPES.COMPANY.COMPARE_NAME, helpers.companyCompareName);
+  yield takeEvery(ACTION_TYPES.COMPARE_COMPANY.NAME, helpers.companyCompareName);
 }
 
 export function* dataSaga() {

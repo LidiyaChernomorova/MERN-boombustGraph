@@ -1,24 +1,28 @@
 export const ACTION_TYPES = {
     META: {
-      START: "data: get tableDataStart",
-      SUCCESS: "data: get tableDataSuccess",
-      FAILED: "data: get tableDataFailed",
+      START: "data: get table data start",
+      SUCCESS: "data: get table data success",
+      FAILED: "data: get table data failed",
     },
     COMPANY: {
-      START: "data: get companyDataStart",
-      SUCCESS: "data: get companyDataSuccess",
-      FAILED: "data: get companyDataFailed",
+      START: "data: get data for company start",
+      SUCCESS: "data: get data for company success",
+      FAILED: "data: get data for company fail",
       NAME: "data: selected company name",
+    },
+    COMPARE_COMPANY: {
+      START: "data:  get data for company compare start",
+      SUCCESS: "data:  get data for company compare success",
+      FAILED: "data:  get data for company compare fail",
+      NAME: "data: selected company to compare name and value for input <compare>",
+    },
+    INPUT: {
       FROM: "data: value for input <from>",
       TO: "data: value for input <to>",
-      COMPARE_NAME: "data: value for input <compare>",
-      COMPARE_START: "data: company data for compare start",
-      COMPARE_SUCCESS: "data: company data for compare success",
-      COMPARE_FAILED: "data: company data for compare fail",
     },
     NOTE: {
-      START: "data: get noteStart",
-      SUCCESS: "data: get noteSuccess",
-      FAILED: "data: get noteFailed",
+      START: "data: get note start",
+      SUCCESS: "data: get note success",
+      FAILED: "data: get note failed",
     }
 };

@@ -45,15 +45,15 @@ export function setCompanyFailed(error: Error) {
 
 // COMPANY COMPARE
 export function setCompanyCompareStart(companyName: string) {
-  return createAction<string>(ACTION_TYPES.COMPANY.COMPARE_START, companyName);
+  return createAction<string>(ACTION_TYPES.COMPARE_COMPANY.START, companyName);
 }
 
 export function setCompanyCompareSuccess(company: CompanyData) {
-  return createAction<CompanyData>(ACTION_TYPES.COMPANY.COMPARE_SUCCESS, company);
+  return createAction<CompanyData>(ACTION_TYPES.COMPARE_COMPANY.SUCCESS, company);
 }
 
 export function setCompanyCompareFailed(error: Error) {
-  return createAction<Error>(ACTION_TYPES.COMPANY.COMPARE_FAILED, error);
+  return createAction<Error>(ACTION_TYPES.COMPARE_COMPANY.FAILED, error);
 }
 
 export function companyName(companyName: string) {
@@ -63,18 +63,18 @@ export function companyName(companyName: string) {
 // INPUTS
 export function setFrom(from: { value: string; index: number }) {
   return createAction<{ value: string; index: number }>(
-    ACTION_TYPES.COMPANY.FROM,
+    ACTION_TYPES.INPUT.FROM,
     from
   );
 }
 
 export function setTo(to: { value: string; index: number }) {
   return createAction<{ value: string; index: number }>(
-    ACTION_TYPES.COMPANY.TO,
+    ACTION_TYPES.INPUT.TO,
     to
   );
 }
 
 export function setCompare(companyName: string) {
-  return createAction<string>(ACTION_TYPES.COMPANY.COMPARE_NAME, companyName);
+  return createAction<string>(ACTION_TYPES.COMPARE_COMPANY.NAME, companyName);
 }

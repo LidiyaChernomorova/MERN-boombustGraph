@@ -11,7 +11,7 @@ export function* onMetaDataStart() {
 }
 
 export function* onСompanyPickedName() {
-  yield takeEvery(ACTION_TYPES.COMPANY.PICKED_NAME, helpers.companyPickedName);
+  yield takeEvery(ACTION_TYPES.COMPANY.NAME, helpers.companyName);
 }
 
 export function* onNoteDataStart() {

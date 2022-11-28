@@ -8,8 +8,10 @@ const USER_INITIAL_STATE: DataStore = {
   notesIsLoading: false,
   tableIsLoading: false,
   companyIsLoading: false,
-  companyPicked: null,
-  companyPickedName: "",
+  company: null,
+  companyName: "",
+  companyCompareName: "",
+  companyCompare: null,
   from: { value: "", index: 0 },
   to: { value: "", index: 0 },
 };
@@ -25,6 +27,7 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
       return { ...state, tableDataNotes: payload, notesIsLoading: false };
     case ACTION_TYPES.NOTE.FAILED:
       return { ...state, error: payload, notesIsLoading: false };
+
     // META
     case ACTION_TYPES.META.START:
       return { ...state, tableIsLoading: true };
@@ -32,21 +35,24 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
       return { ...state, tableData: payload, tableIsLoading: false };
     case ACTION_TYPES.META.FAILED:
       return { ...state, error: payload, tableIsLoading: false };
+
     // COMPANY
     case ACTION_TYPES.COMPANY.START:
       return { ...state, companyIsLoading: true };
     case ACTION_TYPES.COMPANY.SUCCESS:
-      return { ...state, companyPicked: payload, companyIsLoading: false };
+      return { ...state, company: payload, companyIsLoading: false };
     case ACTION_TYPES.COMPANY.FAILED:
       return { ...state, error: payload, companyIsLoading: false };
-    case ACTION_TYPES.COMPANY.PICKED_NAME:
-      return { ...state, companyPickedName: payload };
+    case ACTION_TYPES.COMPANY.NAME:
+      return { ...state, companyName: payload };
 
     // INPUTS
     case ACTION_TYPES.COMPANY.FROM:
       return { ...state, from: payload };
     case ACTION_TYPES.COMPANY.TO:
       return { ...state, to: payload };
+    case ACTION_TYPES.COMPANY.COMPARE_NAME:
+      return { ...state, companyCompareName: payload };
 
     default:
       return state;

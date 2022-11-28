@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import { Autocomplete, TextField } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   selectCompanies,
   selectPikedCompanyName,
 } from "../../store/data/data.selector";
+import { setCompare } from "../../store/data/data.action";
+
 
 export default function CompareInput() {
+  const dispatch = useDispatch();
   const options = useSelector(selectCompanies);
   const pikedCompanyName = useSelector(selectPikedCompanyName);
-  const [value, setValue] = useState("");
-  const [inputValue, setInputValue] = useState("");
+  const [value, setValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   return (
     <Autocomplete
       size="small"
       value={value}
       onChange={(event: any, value: string | null) => {
-        value && setValue(value);
+        setValue(value ?? '');
+        dispatch(setCompare(value ?? ''));
       }}
       inputValue={inputValue}
       onInputChange={(event, newInputValue: string) => {

@@ -7,8 +7,8 @@ import {
   companyDataStart,
   companyDataSuccess,
   companyDataFailed,
-  getFrom,
-  getTo,
+  setFrom,
+  setTo,
   noteDataFailed,
   noteDataSuccess,
 } from "./data.action";
@@ -54,8 +54,8 @@ function* companyData(action: Action) {
       value: data.DATE[data.DATE.length - 1],
       index: data.DATE.length - 1,
     };
-    yield put(getFrom(from));
-    yield put(getTo(to));
+    yield put(setFrom(from));
+    yield put(setTo(to));
   } catch (error: any) {
     yield put(companyDataFailed(error));
   }
@@ -70,7 +70,7 @@ function* tableData() {
   }
 }
 
-function* companyPickedName(action: Action) {
+function* companyName(action: Action) {
   yield put(companyDataStart(action.payload));
 }
 
@@ -86,7 +86,7 @@ function* noteDataStart() {
 const helpers = {
   companyData,
   tableData,
-  companyPickedName,
+  companyName,
   noteDataStart,
 };
 

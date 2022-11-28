@@ -11695,8 +11695,8 @@ const prevCompany = {
 function Graph() {
   const [data, setData] = useState<Partial<OhclData>[] | null>(null);
   const [layout, setLayout] = useState<Partial<Layout> | null>(null);
-  const companyPicked = useSelector(selectPikedCompany);
-  const companyPickedName = useSelector(selectPikedCompanyName);
+  const company = useSelector(selectPikedCompany);
+  const companyName = useSelector(selectPikedCompanyName);
   const selectedFrom = useSelector(selectFrom);
   const selectedTo = useSelector(selectTo);
   const isLoading = useSelector(selectCompanyDataIsLoading);
@@ -11709,12 +11709,12 @@ function Graph() {
       setLayout(makeLayout(null));
     }
     if (prevCompany) {
-      companyPicked && setData([makeData(companyPicked, GRAPH_COLORS.MAIN),makeData((prevCompany as any), GRAPH_COLORS.COMPARE)]);
+      company && setData([makeData(company, GRAPH_COLORS.MAIN),makeData((prevCompany as any), GRAPH_COLORS.COMPARE)]);
     } else {
-      companyPicked && setData([makeData(companyPicked, GRAPH_COLORS.MAIN)]);
+      company && setData([makeData(company, GRAPH_COLORS.MAIN)]);
     }
 
-  }, [companyPicked, selectedFrom, selectedTo]);
+  }, [company, selectedFrom, selectedTo]);
 
   return (
     <Card sx={{ p: 2, mt: 2 }} style={{ height: "500px" }}>
@@ -11730,7 +11730,7 @@ function Graph() {
             }}
           >
             <Typography sx={{ p: 1 }} variant="h6">
-              {companyPickedName}
+              {companyName}
             </Typography>
             <div style={{ display: "flex", gap: "40px" }}>
               <CompareInput />

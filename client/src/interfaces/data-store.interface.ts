@@ -8,8 +8,10 @@ export default interface DataStore {
   tableIsLoading: boolean;
   notesIsLoading: boolean;
   companyIsLoading: boolean;
-  companyPicked: CompanyData | null;
-  companyPickedName: string;
+  company: CompanyData | null;
+  companyName: string;
+  companyCompareName: string;
+  companyCompare: CompanyData | null;
   from: { value: string; index: number };
   to: { value: string; index: number };
 }

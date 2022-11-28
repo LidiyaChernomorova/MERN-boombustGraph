@@ -9,9 +9,11 @@ export const selectTableDataIsLoading = (store: Store) =>
 export const selectCompanyDataIsLoading = (store: Store) =>
   store.data.companyIsLoading;
 export const selectPikedCompanyName = (store: Store) =>
-  store.data.companyPickedName;
-export const selectPikedCompany = (store: Store) => store.data.companyPicked;
+  store.data.companyName;
+export const selectPikedCompany = (store: Store) => store.data.company;
 export const selectFrom = (store: Store) =>
   store.data.from;
 export const selectTo = (store: Store) =>
   store.data.to;
+export const selectCompanyCompare = (store: Store) =>
+  store.data.companyCompare;

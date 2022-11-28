@@ -10,7 +10,7 @@ import {
   Card,
 } from "@mui/material";
 import { grey, brown } from "@mui/material/colors";
-import { companyPickedName } from "../../store/data/data.action";
+import { companyName } from "../../store/data/data.action";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -87,7 +87,7 @@ function CompanyTable() {
   }
 
   function pickCompany(asset: string): void {
-    dispatch(companyPickedName(asset));
+    dispatch(companyName(asset));
   }
 
   useEffect(() => {

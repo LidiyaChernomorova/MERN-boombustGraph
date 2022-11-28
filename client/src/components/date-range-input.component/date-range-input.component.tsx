@@ -17,13 +17,13 @@ export default function DateRangeInput({
   const [options, setOptions] = useState<string[]>([]);
   const [value, setValue] = useState<string | null>("");
   const [inputValue, setInputValue] = useState("");
-  const companyPicked = useSelector(selectPikedCompany);
+  const company = useSelector(selectPikedCompany);
   const selectedFrom = useSelector(selectFrom);
   const selectedTo = useSelector(selectTo);
 
    useEffect(() => {
-    companyPicked && setOptions(companyPicked.DATE);
-  }, [companyPicked]);
+    company && setOptions(company.DATE);
+  }, [company]);
 
   useEffect(() => {
     setValue(

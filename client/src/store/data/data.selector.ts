@@ -17,3 +17,5 @@ export const selectTo = (store: Store) =>
   store.data.to;
 export const selectCompanyCompare = (store: Store) =>
   store.data.companyCompare;
+export const selectCompanyCompareName = (store: Store) =>
+  store.data.companyCompareName;

@@ -94,7 +94,6 @@ function* companyName(action: Action) {
 }
 
 function* companyCompareName(action: Action) {
-  console.log(action)
  yield put(setCompanyCompareStart(action.payload));
 }
 

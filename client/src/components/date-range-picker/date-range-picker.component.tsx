@@ -1,5 +1,5 @@
 import React from "react";
-import AutocompleteInput from "../autocomplete-input.component/autocomplete-input.component";
+import DateRangeInput from "../date-range-input.component/date-range-input.component";
 import { useDispatch } from "react-redux";
 import {
   companyPickedFrom,
@@ -23,8 +23,8 @@ export default function DateRangePicker() {
         gridTemplateColumns: "repeat(2, 1fr)",
       }}
     >
-      <AutocompleteInput label="from" passValueToParent={handler} />
-      <AutocompleteInput label="to" passValueToParent={handler} />
+      <DateRangeInput label="from" passValueToParent={handler} />
+      <DateRangeInput label="to" passValueToParent={handler} />
     </div>
   );
 }

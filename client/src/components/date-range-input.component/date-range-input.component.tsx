@@ -7,7 +7,7 @@ import {
   selectPikedCompanyTo,
 } from "../../store/data/data.selector";
 
-export default function AutocompleteInput({
+export default function DateRangeInput({
   label,
   passValueToParent,
 }: {

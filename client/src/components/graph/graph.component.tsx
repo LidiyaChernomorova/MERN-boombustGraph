@@ -13,6 +13,7 @@ import {
   selectPikedCompanyTo,
 } from "../../store/data/data.selector";
 import CompareInput from "../compare-input.component copy/compare-input.component";
+import GRAPH_COLORS from "./graph.colors";
 
 function Graph() {
   const [data, setData] = useState<Partial<OhclData> | null>(null);
@@ -29,7 +30,7 @@ function Graph() {
     } else {
       setLayout(makeLayout(null));
     }
-    companyPicked && setData(makeData(companyPicked));
+    companyPicked && setData(makeData(companyPicked, GRAPH_COLORS.MAIN));
   }, [companyPicked, companyPickedFrom, companyPickedTo]);
 
   return (
@@ -49,7 +50,7 @@ function Graph() {
               {companyPickedName}
             </Typography>
             <div style={{ display: "flex", gap: "40px" }}>
-              <CompareInput  />
+              <CompareInput />
               <DateRangePicker />
             </div>
           </div>

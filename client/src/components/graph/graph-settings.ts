@@ -1,6 +1,11 @@
 import { Layout, Config, OhclData } from "plotly.js";
-import { grey } from "@mui/material/colors";
+import { grey, red, lightGreen, lightBlue, yellow } from "@mui/material/colors";
 import CompanyData from "../../interfaces/company-data.interface";
+
+interface LineColors {
+  decreasing: { line: { color: string } };
+  increasing: { line: { color: string } };
+}
 
 // m/d/yyyy -> yyyy-mm-dd
 function parseDateForPlotly(dateAndHour: string): string {
@@ -51,7 +56,7 @@ export function makeLayout(range: string[] | null): Partial<any> {
     },
   };
 
-  return range && !range.includes('')
+  return range && !range.includes("")
     ? {
         ...defaultSettings,
         xaxis: {
@@ -68,10 +73,12 @@ export const config: Partial<Config> = {
   displayModeBar: false,
 };
 
-export function makeData(data: CompanyData): Partial<OhclData> {
+export function makeData(
+  data: CompanyData,
+  colors: LineColors
+): Partial<OhclData> {
   const defaultSettings = {
-    decreasing: { line: { color: "#d70200" } },
-    increasing: { line: { color: "#6ba583" } },
+    ...colors,
     type: "ohlc" as "ohcl",
     xaxis: "x",
     yaxis: "y",

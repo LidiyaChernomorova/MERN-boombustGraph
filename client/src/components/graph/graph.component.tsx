@@ -12,6 +12,7 @@ import {
   selectPikedCompanyFrom,
   selectPikedCompanyTo,
 } from "../../store/data/data.selector";
+import CompareInput from "../compare-input.component copy/compare-input.component";
 
 function Graph() {
   const [data, setData] = useState<Partial<OhclData> | null>(null);
@@ -47,7 +48,10 @@ function Graph() {
             <Typography sx={{ p: 1 }} variant="h6">
               {companyPickedName}
             </Typography>
-            <DateRangePicker />
+            <div style={{ display: "flex", gap: "40px" }}>
+              <CompareInput  />
+              <DateRangePicker />
+            </div>
           </div>
           <Plot
             data={[data]}

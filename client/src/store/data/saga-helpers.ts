@@ -7,8 +7,8 @@ import {
   companyDataStart,
   companyDataSuccess,
   companyDataFailed,
-  companyPickedFrom,
-  companyPickedTo,
+  getFrom,
+  getTo,
   noteDataFailed,
   noteDataSuccess,
 } from "./data.action";
@@ -54,8 +54,8 @@ function* companyData(action: Action) {
       value: data.DATE[data.DATE.length - 1],
       index: data.DATE.length - 1,
     };
-    yield put(companyPickedFrom(from));
-    yield put(companyPickedTo(to));
+    yield put(getFrom(from));
+    yield put(getTo(to));
   } catch (error: any) {
     yield put(companyDataFailed(error));
   }

@@ -64,14 +64,14 @@ export function companyPickedName(companyName: string) {
   );
 }
 
-export function companyPickedFrom(from: { value: string; index: number }) {
+export function getFrom(from: { value: string; index: number }) {
   return createAction<{ value: string; index: number }>(
     ACTION_TYPES.COMPANY.PICKED_FROM,
     from
   );
 }
 
-export function companyPickedTo(to: { value: string; index: number }) {
+export function getTo(to: { value: string; index: number }) {
   return createAction<{ value: string; index: number }>(
     ACTION_TYPES.COMPANY.PICKED_TO,
     to

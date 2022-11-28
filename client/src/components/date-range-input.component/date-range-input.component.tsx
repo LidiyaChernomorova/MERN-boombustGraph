@@ -3,8 +3,8 @@ import { Autocomplete, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
 import {
   selectPikedCompany,
-  selectPikedCompanyFrom,
-  selectPikedCompanyTo,
+  selectFrom,
+  selectTo,
 } from "../../store/data/data.selector";
 
 export default function DateRangeInput({
@@ -18,8 +18,8 @@ export default function DateRangeInput({
   const [value, setValue] = useState<string | null>("");
   const [inputValue, setInputValue] = useState("");
   const companyPicked = useSelector(selectPikedCompany);
-  const selectedOptionFrom = useSelector(selectPikedCompanyFrom);
-  const selectedOptionTo = useSelector(selectPikedCompanyTo);
+  const selectedFrom = useSelector(selectFrom);
+  const selectedTo = useSelector(selectTo);
 
    useEffect(() => {
     companyPicked && setOptions(companyPicked.DATE);
@@ -27,9 +27,9 @@ export default function DateRangeInput({
 
   useEffect(() => {
     setValue(
-      label === "from" ? selectedOptionFrom.value : selectedOptionTo.value
+      label === "from" ? selectedFrom.value : selectedTo.value
     );
-  }, [selectedOptionFrom, selectedOptionTo]);
+  }, [selectedFrom, selectedTo]);
 
 
   return (
@@ -47,8 +47,8 @@ export default function DateRangeInput({
       }}
       options={options}
       getOptionDisabled={(option) =>
-        (label === "to" && Date.parse(option) <= Date.parse(selectedOptionFrom.value)) || 
-        (label === "from" && Date.parse(option) >= Date.parse(selectedOptionTo.value))
+        (label === "to" && Date.parse(option) <= Date.parse(selectedFrom.value)) || 
+        (label === "from" && Date.parse(option) >= Date.parse(selectedTo.value))
       }
       sx={{ width: 180 }}
       renderInput={(params) => <TextField {...params} label={label} />}

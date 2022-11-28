@@ -11,7 +11,7 @@ export const selectCompanyDataIsLoading = (store: Store) =>
 export const selectPikedCompanyName = (store: Store) =>
   store.data.companyPickedName;
 export const selectPikedCompany = (store: Store) => store.data.companyPicked;
-export const selectPikedCompanyFrom = (store: Store) =>
-  store.data.companyPickedFrom;
-export const selectPikedCompanyTo = (store: Store) =>
-  store.data.companyPickedTo;
+export const selectFrom = (store: Store) =>
+  store.data.from;
+export const selectTo = (store: Store) =>
+  store.data.to;

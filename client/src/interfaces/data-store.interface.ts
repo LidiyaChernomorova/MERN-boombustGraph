@@ -10,6 +10,6 @@ export default interface DataStore {
   companyIsLoading: boolean;
   companyPicked: CompanyData | null;
   companyPickedName: string;
-  companyPickedFrom: { value: string; index: number };
-  companyPickedTo: { value: string; index: number };
+  from: { value: string; index: number };
+  to: { value: string; index: number };
 }

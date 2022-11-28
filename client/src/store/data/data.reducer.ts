@@ -10,8 +10,8 @@ const USER_INITIAL_STATE: DataStore = {
   companyIsLoading: false,
   companyPicked: null,
   companyPickedName: "",
-  companyPickedFrom: { value: "", index: 0 },
-  companyPickedTo: { value: "", index: 0 },
+  from: { value: "", index: 0 },
+  to: { value: "", index: 0 },
 };
 
 export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
@@ -42,9 +42,9 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
     case ACTION_TYPES.COMPANY.PICKED_NAME:
       return { ...state, companyPickedName: payload };
     case ACTION_TYPES.COMPANY.PICKED_FROM:
-      return { ...state, companyPickedFrom: payload };
+      return { ...state, from: payload };
     case ACTION_TYPES.COMPANY.PICKED_TO:
-      return { ...state, companyPickedTo: payload };
+      return { ...state, to: payload };
     default:
       return state;
   }

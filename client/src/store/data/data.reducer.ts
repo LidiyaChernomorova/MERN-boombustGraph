@@ -41,10 +41,13 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
       return { ...state, error: payload, companyIsLoading: false };
     case ACTION_TYPES.COMPANY.PICKED_NAME:
       return { ...state, companyPickedName: payload };
-    case ACTION_TYPES.COMPANY.PICKED_FROM:
+
+    // INPUTS
+    case ACTION_TYPES.COMPANY.FROM:
       return { ...state, from: payload };
-    case ACTION_TYPES.COMPANY.PICKED_TO:
+    case ACTION_TYPES.COMPANY.TO:
       return { ...state, to: payload };
+
     default:
       return state;
   }

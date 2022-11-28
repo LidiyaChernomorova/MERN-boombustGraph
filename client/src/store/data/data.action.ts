@@ -66,14 +66,14 @@ export function companyPickedName(companyName: string) {
 
 export function getFrom(from: { value: string; index: number }) {
   return createAction<{ value: string; index: number }>(
-    ACTION_TYPES.COMPANY.PICKED_FROM,
+    ACTION_TYPES.COMPANY.FROM,
     from
   );
 }
 
 export function getTo(to: { value: string; index: number }) {
   return createAction<{ value: string; index: number }>(
-    ACTION_TYPES.COMPANY.PICKED_TO,
+    ACTION_TYPES.COMPANY.TO,
     to
   );
 }

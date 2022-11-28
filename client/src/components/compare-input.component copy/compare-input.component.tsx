@@ -7,7 +7,6 @@ import {
 } from "../../store/data/data.selector";
 import { setCompare } from "../../store/data/data.action";
 
-
 export default function CompareInput() {
   const dispatch = useDispatch();
   const options = useSelector(selectCompanies);
@@ -20,8 +19,8 @@ export default function CompareInput() {
       size="small"
       value={value}
       onChange={(event: any, value: string | null) => {
-        setValue(value ?? '');
-        dispatch(setCompare(value ?? ''));
+        setValue(value ?? "");
+        dispatch(setCompare(value ?? ""));
       }}
       inputValue={inputValue}
       onInputChange={(event, newInputValue: string) => {

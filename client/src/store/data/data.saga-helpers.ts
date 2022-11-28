@@ -4,9 +4,12 @@ import TableData from "../../interfaces/table-data.interface";
 import {
   tableDataFailed,
   tableDataSuccess,
-  companyDataStart,
-  companyDataSuccess,
-  companyDataFailed,
+  setCompanyStart,
+  setCompanySuccess,
+  setCompanyFailed,
+  setCompanyCompareStart,
+  setCompanyCompareSuccess,
+  setCompanyCompareFailed,
   setFrom,
   setTo,
   noteDataFailed,
@@ -45,10 +48,10 @@ async function getNotes(): Promise<NoteData[]> {
 
 // HELPES TO EXPORT
 
-function* companyData(action: Action) {
+function* companyStart(action: Action) {
   try {
     const data: CompanyData = yield call(getCompanyData, action.payload);
-    yield put(companyDataSuccess(data));
+    yield put(setCompanySuccess(data));
     const from = { value: data.DATE[0], index: 0 };
     const to = {
       value: data.DATE[data.DATE.length - 1],
@@ -57,7 +60,23 @@ function* companyData(action: Action) {
     yield put(setFrom(from));
     yield put(setTo(to));
   } catch (error: any) {
-    yield put(companyDataFailed(error));
+    yield put(setCompanyFailed(error));
+  }
+}
+
+function* companyCompareStart(action: Action) {
+  try {
+    const data: CompanyData = yield call(getCompanyData, action.payload);
+    yield put(setCompanyCompareSuccess(data));
+    // const from = { value: data.DATE[0], index: 0 };
+    // const to = {
+    //   value: data.DATE[data.DATE.length - 1],
+    //   index: data.DATE.length - 1,
+    // };
+    // yield put(setFrom(from));
+    // yield put(setTo(to));
+  } catch (error: any) {
+    yield put(setCompanyCompareFailed(error));
   }
 }
 
@@ -71,7 +90,12 @@ function* tableData() {
 }
 
 function* companyName(action: Action) {
-  yield put(companyDataStart(action.payload));
+  yield put(setCompanyStart(action.payload));
+}
+
+function* companyCompareName(action: Action) {
+  console.log(action)
+ yield put(setCompanyCompareStart(action.payload));
 }
 
 function* noteDataStart() {
@@ -84,10 +108,12 @@ function* noteDataStart() {
 }
 
 const helpers = {
-  companyData,
+  companyStart,
   tableData,
   companyName,
   noteDataStart,
+  companyCompareName,
+  companyCompareStart
 };
 
 export default helpers;

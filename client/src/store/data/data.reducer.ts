@@ -46,6 +46,15 @@ export const dataReducer = (state = USER_INITIAL_STATE, action: Action) => {
     case ACTION_TYPES.COMPANY.NAME:
       return { ...state, companyName: payload };
 
+      // COMPARE
+
+      case ACTION_TYPES.COMPANY.COMPARE_START:
+        return { ...state, companyIsLoading: true };
+      case ACTION_TYPES.COMPANY.COMPARE_SUCCESS:
+        return { ...state, companyCompare: payload, companyIsLoading: false };
+      case ACTION_TYPES.COMPANY.COMPARE_FAILED:
+        return { ...state, error: payload, companyIsLoading: false };
+
     // INPUTS
     case ACTION_TYPES.COMPANY.FROM:
       return { ...state, from: payload };

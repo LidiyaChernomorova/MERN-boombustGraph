@@ -12,6 +12,9 @@ export const ACTION_TYPES = {
       FROM: "data: value for input <from>",
       TO: "data: value for input <to>",
       COMPARE_NAME: "data: value for input <compare>",
+      COMPARE_START: "data: company data for compare start",
+      COMPARE_SUCCESS: "data: company data for compare success",
+      COMPARE_FAILED: "data: company data for compare fail",
     },
     NOTE: {
       START: "data: get noteStart",

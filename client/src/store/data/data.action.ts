@@ -2,6 +2,7 @@ import { ACTION_TYPES } from "./data.type";
 import createAction from "../../helpers/create-action";
 import TableData from "../../interfaces/table-data.interface";
 import NoteData from "../../interfaces/notes-data.interface";
+import CompanyData from "../../interfaces/company-data.interface";
 
 // TABLE
 export function tableDataStart() {
@@ -30,16 +31,29 @@ export function noteDataFailed(error: Error) {
 }
 
 // COMPANY
-export function companyDataStart(companyName: string) {
+export function setCompanyStart(companyName: string) {
   return createAction<string>(ACTION_TYPES.COMPANY.START, companyName);
 }
 
-export function companyDataSuccess(companyData: any) {
-  return createAction<any>(ACTION_TYPES.COMPANY.SUCCESS, companyData);
+export function setCompanySuccess(company: CompanyData) {
+  return createAction<CompanyData>(ACTION_TYPES.COMPANY.SUCCESS, company);
 }
 
-export function companyDataFailed(error: Error) {
+export function setCompanyFailed(error: Error) {
   return createAction<Error>(ACTION_TYPES.COMPANY.FAILED, error);
+}
+
+// COMPANY COMPARE
+export function setCompanyCompareStart(companyName: string) {
+  return createAction<string>(ACTION_TYPES.COMPANY.COMPARE_START, companyName);
+}
+
+export function setCompanyCompareSuccess(company: CompanyData) {
+  return createAction<CompanyData>(ACTION_TYPES.COMPANY.COMPARE_SUCCESS, company);
+}
+
+export function setCompanyCompareFailed(error: Error) {
+  return createAction<Error>(ACTION_TYPES.COMPANY.COMPARE_FAILED, error);
 }
 
 export function companyName(companyName: string) {

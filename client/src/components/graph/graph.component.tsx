@@ -12,7 +12,7 @@ import {
   selectFrom,
   selectTo,
   selectCompanyCompare,
-  selectCompanyCompareName
+  selectCompanyCompareName,
 } from "../../store/data/data.selector";
 import CompareInput from "../compare-input.component copy/compare-input.component";
 import GRAPH_COLORS from "./graph.colors";
@@ -28,19 +28,21 @@ function Graph() {
   const companyCompare = useSelector(selectCompanyCompare);
   const companyCompareName = useSelector(selectCompanyCompareName);
 
+  useEffect(() => {
+    setLayout(
+      makeLayout(
+        selectedFrom && selectedTo
+          ? [selectedFrom.value, selectedTo.value]
+          : null
+      )
+    );
+  }, [selectedFrom, selectedTo]);
 
   useEffect(() => {
-    if (selectedFrom && selectedTo) {
-      setLayout(makeLayout([selectedFrom.value, selectedTo.value]));
-    } else {
-      setLayout(makeLayout(null));
-    }
-    if (companyCompareName) {
-      company && companyCompare && setData([makeData(company, GRAPH_COLORS.MAIN),makeData((companyCompare as any), GRAPH_COLORS.COMPARE)]);
-    } else {
-      company && setData([makeData(company, GRAPH_COLORS.MAIN)]);
-    }
-
+    company &&
+      setData(
+        companyCompare ? makeData(company, companyCompare) : makeData(company)
+      );
   }, [company, selectedFrom, selectedTo, companyCompare]);
 
   return (

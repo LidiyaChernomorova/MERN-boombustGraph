@@ -4,14 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   selectCompanies,
   selectPikedCompanyName,
+  selectCompanyCompareName
 } from "../../store/data/data.selector";
 import { setCompare } from "../../store/data/data.action";
 
 export default function CompareInput() {
   const dispatch = useDispatch();
   const options = useSelector(selectCompanies);
+  const companyCompareName = useSelector(selectCompanyCompareName);
   const pikedCompanyName = useSelector(selectPikedCompanyName);
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>(companyCompareName);
   const [inputValue, setInputValue] = useState<string>("");
 
   return (

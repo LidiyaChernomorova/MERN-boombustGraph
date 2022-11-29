@@ -7,6 +7,7 @@ import {
   setCompanyStart,
   setCompanySuccess,
   setCompanyFailed,
+  setCompanyCompareName,
   setCompanyCompareStart,
   setCompanyCompareSuccess,
   setCompanyCompareFailed,
@@ -18,6 +19,7 @@ import {
 import CompanyData from "../../interfaces/company-data.interface";
 import Action from "../../interfaces/action.interface";
 import NoteData from "../../interfaces/notes-data.interface";
+
 
 async function getMetaData(): Promise<TableData[]> {
   const { data } = await api.getMetaData();
@@ -90,6 +92,7 @@ function* tableData() {
 
 function* companyName(action: Action) {
   yield put(setCompanyStart(action.payload));
+  yield put(setCompanyCompareName(''));
 }
 
 function* companyCompareName(action: Action) {

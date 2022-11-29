@@ -12,10 +12,8 @@ import {
   selectFrom,
   selectTo,
   selectCompanyCompare,
-  selectCompanyCompareName,
 } from "../../store/data/data.selector";
 import CompareInput from "../compare-input.component copy/compare-input.component";
-import GRAPH_COLORS from "./graph.colors";
 
 function Graph() {
   const [data, setData] = useState<Partial<OhclData>[] | null>(null);
@@ -26,7 +24,6 @@ function Graph() {
   const selectedTo = useSelector(selectTo);
   const isLoading = useSelector(selectCompanyDataIsLoading);
   const companyCompare = useSelector(selectCompanyCompare);
-  const companyCompareName = useSelector(selectCompanyCompareName);
 
   useEffect(() => {
     setLayout(

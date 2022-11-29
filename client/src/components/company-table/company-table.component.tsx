@@ -44,7 +44,6 @@ function CompanyTable() {
   const classes = useStyles();
 
   function saveNoteDialog(noteText: string) {
-    console.log(pickedNote);
     setOpen(false);
     if (pickedNote?._id) {
       apis
@@ -93,7 +92,7 @@ function CompanyTable() {
   useEffect(() => {
     dispatch(tableDataStart());
     dispatch(noteDataStart());
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) {
     return <Card sx={{ p: 2, height: 270 }}>loading...</Card>;

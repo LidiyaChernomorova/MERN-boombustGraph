@@ -29,7 +29,7 @@ export default function DateRangeInput({
     setValue(
       label === "from" ? selectedFrom.value : selectedTo.value
     );
-  }, [selectedFrom, selectedTo]);
+  }, [selectedFrom, selectedTo, label]);
 
 
   return (

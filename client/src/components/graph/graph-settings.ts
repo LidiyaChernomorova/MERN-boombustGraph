@@ -83,7 +83,7 @@ export function makeData(
     xaxis: "x",
     yaxis: "y",
   };
-  const colors = conpanyCompare ? GRAPH_COLORS.MAIN : GRAPH_COLORS.COMPARE;
+  const colors = conpanyCompare ? GRAPH_COLORS.COMPARE : GRAPH_COLORS.MAIN;
   const data = {
     ...defaultSettings,
     ...colors,

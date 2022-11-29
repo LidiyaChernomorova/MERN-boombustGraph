@@ -48,8 +48,8 @@ export function setCompanyCompareStart(companyName: string) {
   return createAction<string>(ACTION_TYPES.COMPARE_COMPANY.START, companyName);
 }
 
-export function setCompanyCompareSuccess(company: CompanyData) {
-  return createAction<CompanyData>(ACTION_TYPES.COMPARE_COMPANY.SUCCESS, company);
+export function setCompanyCompareSuccess(company: CompanyData | null) {
+  return createAction<CompanyData | null>(ACTION_TYPES.COMPARE_COMPANY.SUCCESS, company);
 }
 
 export function setCompanyCompareFailed(error: Error) {

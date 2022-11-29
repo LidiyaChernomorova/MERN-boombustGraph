@@ -45,7 +45,6 @@ async function getNotes(): Promise<NoteData[]> {
   return data.notes;
 }
 
-
 // HELPES TO EXPORT
 
 function* companyStart(action: Action) {
@@ -94,7 +93,11 @@ function* companyName(action: Action) {
 }
 
 function* companyCompareName(action: Action) {
- yield put(setCompanyCompareStart(action.payload));
+  if (action.payload) {
+    yield put(setCompanyCompareStart(action.payload));
+  } else {
+    yield put(setCompanyCompareSuccess(null));
+  }
 }
 
 function* noteDataStart() {
@@ -112,7 +115,7 @@ const helpers = {
   companyName,
   noteDataStart,
   companyCompareName,
-  companyCompareStart
+  companyCompareStart,
 };
 
 export default helpers;
